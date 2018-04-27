@@ -1,0 +1,31 @@
+<div class="easyui-layout" data-options="fit:true">
+	<div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="zhw-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <form id="zhw-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right">职位编号:</td>
+                        <td><input type="text" name="text_s_p01" class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">职位名称:</td>
+                        <td><input type="text" name="text_s_p02" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">本经销商代码:</td>
+                        <td><input type="text" name="text_s_p00" class="wu-text" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>

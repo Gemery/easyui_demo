@@ -1,0 +1,68 @@
+<div class="easyui-layout" data-options="fit:true">
+	<div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="zhw-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <form id="zhw-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width: 60px;">所属经销商代码:</td>
+                        <td><input type="text" name="s_occ00" class="wu-text" /></td>
+                        <td align="right">客户姓名:</td>
+                        <td><input type="text" name="ss_occ02" class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">客户电话:</td>
+                        <td><input type="text" name="ss_occ03" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">客户收货地址:</td>
+                        <td><input type="text" name="s_occ04" class="wu-text" /></td>
+                        <td align="right">建立资料时间:</td>
+                        <td><input type="text" name="s_occ05" class="wu-text easyui-datebox" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">客户微信号:</td>
+                        <td><input type="text" name="s_occ06" class="wu-text" /></td>
+                        <td align="right">客户VIP账号:</td>
+                        <td><input type="text" name="s_occ07" class="wu-text" /></td>
+
+                    </tr>
+
+                    <tr>
+                        <td align="right">结算方式:</td>
+                        <td><input type="text" name="s_occ08" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">客户类型:</td>
+                        <td><select class="easyui-combobox" panelHeight="auto" style="width:100px">
+                            <option value="0">选择用户组</option>
+                            <option value="1">个人客户</option>
+                            <option value="2">公司客户</option>
+                            <option value="3">工程客户</option>
+                        </select></td>
+                        <td align="right">客户开票资料:</td>
+                        <td><input type="text" name="s_occ09" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">对应业务员:</td>
+                        <td><input type="text" name="s_occ10" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">对应业务员:</td>
+                        <td><input type="text" name="s_occ11" class="wu-text" /></td>
+                        <td align="right">积分总数:</td>
+                        <td><input type="text" name="s_occ12" class="wu-text" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>

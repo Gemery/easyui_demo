@@ -1,0 +1,52 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="zhw-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <form id="zhw-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width: 60px;">所属经销商代码:</td>
+                        <td><input type="text" name="sw_occ00" class="wu-text" /></td>
+                        <td align="right">员工编号:</td>
+                        <td><input type="text" name="sw_code" class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">姓名:</td>
+                        <td><input type="text" name="sw_name" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">性别:</td>
+                        <td><input type="text" name="sw_sex" class="wu-text" /></td>
+                        <td align="right">身份证号码:</td>
+                        <td><input type="text" name="sw_card" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">部门:</td>
+                        <td><input type="text" name="sw_department" class="wu-text" /></td>
+                        <td align="right">职位:</td>
+                        <td><input type="text" name="sw_posit" class="wu-text" /></td>
+
+                    </tr>
+
+                    <tr>
+                        <td align="right">电话:</td>
+                        <td><input type="text" name="sw_phone" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">员工在职状态:</td>
+                        <td><input type="text" name="sw_status" class="wu-text" />(Y:在职,N:离职)</td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

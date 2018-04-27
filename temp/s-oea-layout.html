@@ -1,0 +1,174 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'center',border:false">
+        <!-- Begin of toolbar -->
+        <div id="zhw-toolbar1" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <form id="zhw-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width: 60px;">经销商代码:</td>
+                        <td><input type="text" name="s_oea00" class="wu-text" /></td>
+                        <td align="right">门店编号:</td>
+                        <td><input type="text" name="s_oea_code" class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">订单类型:</td>
+                        <td><input type="text" name="s_oea_typ" class="wu-text" />（1：零售；2：工程； 3：售后）</td>
+                    </tr>
+                    <tr>
+                        <td align="right">单据编号:</td>
+                        <td><input type="text" name="s_oea01" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">门店名称:</td>
+                        <td><input type="text" name="s_oea_desc" class="wu-text" /></td>
+                        <td align="right">订单日期:</td>
+                        <td><input type="text" name="s_oea02" class="wu-text easyui-datebox" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">消费者手机号:</td>
+                        <td><input type="text" name="s_oea03" class="wu-text" /></td>
+                        <td align="right">消费者姓名:</td>
+                        <td><input type="text" name="s_oea04" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">消费者收货地址:</td>
+                        <td><input type="text" name="s_oea05" class="wu-text" /></td>
+                        <td align="right">业务员编号:</td>
+                        <td><input type="text" name="s_oea06" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">约定送货日期 :</td>
+                        <td><input type="text" name="s_oea07" class="wu-text easyui-datebox" /></td>
+                        <td align="right">价格条件 :</td>
+                        <td><input type="text" name="s_oea08" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核否 :</td>
+                        <td><input type="text" name="s_oea_confirm" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核人 :</td>
+                        <td><input type="text" name="s_oea09" class="wu-text" /></td>
+                        <td align="right">审核日期 :</td>
+                        <td><input type="text" name="s_oea10" class="wu-text easyui-datebox" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">收订金款金额 :</td>
+                        <td><input type="text" name="s_oea11" class="wu-text" /></td>
+                        <td align="right">单据总金额 :</td>
+                        <td><input type="text" name="s_oea12" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">是否开发票 :</td>
+                        <td><input type="text" name="s_oea13" class="wu-text" /></td>
+                        <td align="right">开票金额 :</td>
+                        <td><input type="text" name="s_oea14" class="wu-text" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th field="itemid" width="80">单据编号</th>
+                <th field="itemid" width="80">项次</th>
+                <th field="productid" width="80">物料代码</th>
+                <th field="unitcost" width="80" align="right">物料名称</th>
+                <th field="attr1" width="80">型号</th>
+                <th field="status" width="60" align="center">规格</th>
+                <th field="status" width="60" align="center">数量</th>
+                <th field="attr1" width="80">税点</th>
+                <th field="attr1" width="80">未税单价</th>
+                <th field="attr1" width="80">含税单价</th>
+                <th field="status" width="60" align="center">折扣</th>
+                <th field="status" width="60" align="center">未税金额</th>
+                <th field="status" width="60" align="center">含税金额</th>
+                <th field="status" width="60" align="center">约定交货日期</th>
+                <th field="status" width="60" align="center">结案否</th>
+                <th field="status" width="60" align="center">已发货数量</th>
+                <th field="status" width="60" align="center">是否锁库存</th>
+                <th field="status" width="60" align="center">锁库存单据编号</th>
+                <th field="status" width="60" align="center">锁库存结束日期</th>
+                <th field="status" width="60" align="center">锁库存数量</th>
+                <th field="status" width="60" align="center">收订金明细金</th>
+                <th field="status" width="60" align="center">明细备注</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    /**
+     * Name 分页过滤器
+     */
+    function pagerFilter(data){
+        if (typeof data.length == 'number' && typeof data.splice == 'function'){// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var pager = dg.datagrid('getPager');
+        pager.pagination({
+            onSelectPage:function(pageNum, pageSize){
+                opts.pageNumber = pageNum;
+                opts.pageSize = pageSize;
+                pager.pagination('refresh',{pageNumber:pageNum,pageSize:pageSize});
+                dg.datagrid('loadData',data);
+            }
+        });
+        if (!data.originalRows){
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+
+    /**
+     * Name 载入数据
+     */
+    //    $('#wu-datagrid4').datagrid({
+    //        url:'',  //'temp/datagrid.php',
+    //        loadFilter:pagerFilter,
+    //        rownumbers:true,
+    //        singleSelect:false,
+    //        pageSize:20,
+    //        pagination:true,
+    //        multiSort:true,
+    //        fitColumns:true,
+    //        fit:true,
+    //        columns:[[
+    //            { checkbox:true},
+    //            { field:'productid',title:'价格条件编号',width:100,sortable:true},
+    //            { field:'productname',title:'项次',width:180,sortable:true},
+    //            { field:'unitcost',title:'物料代码',width:100},
+    //            { field:'listprice',title:'物料名称',width:100},
+    //            { field:'attr1',title:'型号',width:100},
+    //            { field:'itemid2',title:'规格',width:100},
+    //            { field:'itemid3',title:'单位',width:100},
+    //            { field:'itemid4',title:'生效日期',width:100},
+    //            { field:'itemid5',title:'失效日期',width:100},
+    //            { field:'itemid6',title:'折扣',width:100},
+    //            { field:'itemid7',title:'是否参与积分',width:100},
+    //            { field:'itemid8',title:'销售提成点数',width:100}
+    //        ]]
+    //    });
+
+</script>
