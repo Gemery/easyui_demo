@@ -1,0 +1,240 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRow()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editRow()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeRow()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <table id="tt" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <!--由单据编号的不同产生 销售发票单头表-->
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="attr1" width="80px" align="center">经销商代码</th>
+                    <th field="status" width="80px" align="center">名店编号</th>
+                    <th field="attr1" width="80px" align="center">单据类型</th>
+                    <th field="status" align="center"  width="80px">发票单据编号</th>
+                    <th field="attr1" width="80px" align="center">单据日期</th>
+                    <th field="attr1" width="80px" align="center">客户手机号码</th>
+                    <th field="attr1" width="80px" align="center">客户姓名</th>
+                    <th field="attr1" width="80px" align="center">客户送货地址</th>
+                    <th field="attr1" width="80px" align="center">来源单据编号</th>
+                    <th field="attr1" width="80px" align="center">款项来源</th>
+                    <th field="attr1" width="80px" align="center">会计科目</th>
+                    <th field="attr1" width="80px" align="center">支付方式</th>
+                    <th field="attr1" width="80px" align="center">收款方式</th>
+                    <th field="attr1" width="80px" align="center">开发票金额</th>
+                    <th field="attr1" width="80px" align="center">税点</th>
+                    <th field="attr1" width="80px" align="center">收款总金额</th>
+                    <th field="attr1" width="80px" align="center">未收额</th>
+                    <th field="attr1" width="80px" align="center">订单收定金金额</th>
+                    <th field="attr1" width="80px" align="center">制单人</th>
+                    <th field="attr1" width="80px" align="center">审核状态</th>
+                    <th field="attr1" width="80px" align="center">审核人</th>
+                    <th field="attr1" width="80px" align="center">审核日期</th>
+                    <th field="attr1" width="80px" align="center">凭证编号</th>
+                    <th field="attr1" width="80px" align="center">账款类型</th>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+            <table id="tt2" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <!--由单据编号的不同产生 销售发票单头表-->
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="status" width="80px" align="center">发票单据编号</th>
+                    <th field="attr1" width="80px" align="center">项次</th>
+                    <th field="attr1" width="80px" align="center">产品编号</th>
+                    <th field="status" align="center"  width="80px">产品名称</th>
+                    <th field="attr1" width="80px" align="center">型号</th>
+                    <th field="attr1" width="80px" align="center">规格</th>
+                    <th field="attr1" width="80px" align="center">单位</th>
+                    <th field="attr1" width="80px" align="center">数量</th>
+                    <th field="attr1" width="80px" align="center">未税单价</th>
+                    <th field="attr1" width="80px" align="center">未税金额</th>
+                    <th field="attr1" width="80px" align="center">含税金额</th>
+                    <th field="attr1" width="80px" align="center">开票金额</th>
+                    <th field="attr1" width="80px" align="center">贷方科目</th>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <div id="dlg" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:600px; padding:10px;">
+                <form id="zh-form" method="post">
+                    <table>
+                        <tr>
+                            <td  align="right">经销商代码:</td>
+                            <td><input type="text" name="s_zx01" class="dm" /></td>
+                            <td align="right">门店编号:</td>
+                            <td><input type="text" name="s_zx02" class="dm"/></td>
+                        </tr>
+                        <tr>
+                            <td align="right">单据类型:</td>
+                            <td>
+                            <select class="easyui-combobox" panelHeight="auto" style="width:100px">
+
+                                <option value="1">零售</option>
+                                <option value="2">工程</option>
+                                <option value="3">售后</option>
+                            </select>
+                            </td>
+                            <td align="right">发票单据编号:</td>
+                            <td><input type="text" name="s_zx04" class="dm" /></td>
+                        </tr>
+
+                        <tr>
+                            <td align="right">单据日期:</td>
+                            <td><input type="text" name="s_zx05"  class="dm easyui-datebox" /></td>
+                            <td align="right">客户手机号:</td>
+                            <td><input type="text" name="s_zx06" class="dm" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">客户姓名 :</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">客户送货地址:</td>
+                            <td><input type="text" name="s_forbid" class="dm"/></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">来源单据编号:</td>
+                            <td><input type="text" name="s_zx08" class="dm"/></td>
+                            <td align="right">款项来源 :</td>
+                            <td><select class="easyui-combobox" panelHeight="auto" style="width:120px">
+
+                                <option value="1">订单订金</option>
+                                <option value="2">出库单应收账款 </option>
+                                <option value="3">其它费用</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td align="right">会计科目 :</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">支付方式:</td>
+                            <td><select class="easyui-combobox" panelHeight="auto" style="width:120px">
+
+                                <option value="1">机刷银行卡</option>
+                                <option value="2">转账 </option>
+                                <option value="3">微信</option>
+                                <option value="3">支付宝</option>
+                            </select></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">收款方式:</td>
+                            <td><select class="easyui-combobox" panelHeight="auto" style="width:120px">
+
+                            <option value="1">现付</option>
+                            <option value="2">月结 </option>
+                            </select></td>
+                            <td align="right">开发票金额 :</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">税点 :</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">收款总金额:</td>
+                            <td><input type="text" name="s_forbid" class="dm"/></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">未收金额:</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">订单收订金金额:</td>
+                            <td><input type="text" name="s_forbid" class="dm"/></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">制单人:</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">审核状态:</td>
+                            <td><input type="text" name="s_forbid" class="dm"/></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">审核人:</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">审核日期:</td>
+                            <td><input type="text" name="s_forbid" class="dm"/></td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">凭证编号:</td>
+                            <td><input type="text" name="s_zxdate" class="dm" /></td>
+                            <td align="right">账款类型:</td>
+                            <td><select class="easyui-combobox" panelHeight="auto" style="width:120px">
+                                <option value="1">出货</option>
+                                <option value="2">订金 </option>
+                                <option value="3">尾款option>
+                                <option value="4">退货款</option>
+                                <option value="5">折让</option>
+                                <option value="6">运费</option>
+                                <option value="7">安装费</option>
+                                <option value="8">售后服务费</option>
+                                <option value="9">配件费</option>
+                                <option value="10">其它</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function formatAction(value,row,index){
+            var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+            var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+            return e+d;
+
+    }
+
+    function getRowIndex(target){
+        var tr = $(target).closest('tr.datagrid-row');
+        return parseInt(tr.attr('datagrid-row-index'));
+    }
+
+    function addRow(){
+        //$('#dlg').dialog('open').dialog('setTitle','add a row')
+
+        $('#dlg').dialog({
+            closed: false,
+            modal:true,
+            title: "销售发票单头",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#dlg').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#dlg').dialog('close');
+                }
+            }]
+        });
+    }
+
+    function editRow(target){
+
+        $('#dlg').dialog('open').dialog('setTitle','添加用户');
+        $('#fm').form('clear');
+       // $('#tt').datagrid('beginEdit', getRowIndex(target));
+    }
+
+</script>

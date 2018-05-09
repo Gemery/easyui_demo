@@ -73,8 +73,6 @@
                 </table>
             </form>
         </div>
-        <!-- End of toolbar -->
-        <!--<table id="wu-datagrid4" toolbar="#wu-toolbar4"></table>-->
         <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
            url="datafrid2_getdata.php"
            rownumbers="true" pagination="true">
@@ -101,64 +99,6 @@
 </div>
 <script type="text/javascript">
 
-    /**
-     * Name 分页过滤器
-     */
-    function pagerFilter(data){
-        if (typeof data.length == 'number' && typeof data.splice == 'function'){// is array
-            data = {
-                total: data.length,
-                rows: data
-            }
-        }
-        var dg = $(this);
-        var opts = dg.datagrid('options');
-        var pager = dg.datagrid('getPager');
-        pager.pagination({
-            onSelectPage:function(pageNum, pageSize){
-                opts.pageNumber = pageNum;
-                opts.pageSize = pageSize;
-                pager.pagination('refresh',{pageNumber:pageNum,pageSize:pageSize});
-                dg.datagrid('loadData',data);
-            }
-        });
-        if (!data.originalRows){
-            data.originalRows = (data.rows);
-        }
-        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
-        var end = start + parseInt(opts.pageSize);
-        data.rows = (data.originalRows.slice(start, end));
-        return data;
-    }
 
-    /**
-     * Name 载入数据
-     */
-//    $('#wu-datagrid4').datagrid({
-    //        url:'',  //'temp/datagrid.php',
-    //        loadFilter:pagerFilter,
-    //        rownumbers:true,
-    //        singleSelect:false,
-    //        pageSize:20,
-    //        pagination:true,
-    //        multiSort:true,
-    //        fitColumns:true,
-    //        fit:true,
-    //        columns:[[
-    //            { checkbox:true},
-    //            { field:'productid',title:'价格条件编号',width:100,sortable:true},
-    //            { field:'productname',title:'项次',width:180,sortable:true},
-    //            { field:'unitcost',title:'物料代码',width:100},
-    //            { field:'listprice',title:'物料名称',width:100},
-    //            { field:'attr1',title:'型号',width:100},
-    //            { field:'itemid2',title:'规格',width:100},
-    //            { field:'itemid3',title:'单位',width:100},
-    //            { field:'itemid4',title:'生效日期',width:100},
-    //            { field:'itemid5',title:'失效日期',width:100},
-    //            { field:'itemid6',title:'折扣',width:100},
-    //            { field:'itemid7',title:'是否参与积分',width:100},
-    //            { field:'itemid8',title:'销售提成点数',width:100}
-    //        ]]
-    //    });
 
 </script>

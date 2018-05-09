@@ -54,4 +54,9 @@ input[type="checkbox"] { cursor: pointer;}
 
 .wu-footer { height:20px; padding:5px; text-align:center; overflow:hidden; background:#e0ecff;}
 
-
+.xw{
+    width:70px;
+}
+.dw{
+    width:100px;
+}

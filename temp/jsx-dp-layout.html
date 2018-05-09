@@ -8,6 +8,10 @@
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
+
+
+            <div class="easyui-dialog" id="my-dialog"style="width:800px;height:380px;padding:10px 20px"
+                          closed="true" buttons="#dlg-buttons">
             <form id="zhw-form" method="post">
                 <table>
                     <tr>
@@ -24,16 +28,16 @@
                     <tr>
                         <td align="right">地址:</td>
                         <td><input type="text" name="loc-sh" class="wu-text" style="width: 60px;"/>
-                        省
-                        <input type="text" name="loc-sh" class="wu-text" style="width: 60px;" />
-                        市
-                        <input type="text" name="loc-qu" class="wu-text" style="width: 60px;"/>
-                        区</td>
+                            省
+                            <input type="text" name="loc-sh" class="wu-text" style="width: 60px;" />
+                            市
+                            <input type="text" name="loc-qu" class="wu-text" style="width: 60px;"/>
+                            区</td>
                     </tr>
 
                     <tr>
                         <td align="right">业务类型:</td>
-                        <td><input type="text" name="login-qx" class="wu-text" />（1:卖场， 2:零售专卖店）</td>
+                        <td><input type="text" name="login-qx" class="wu-text" style="width: 100px;"/>（1:卖场， 2:零售专卖店）</td>
                     </tr>
                     <tr>
                         <td align="right">店铺电话:</td>
@@ -81,6 +85,91 @@
                 </table>
             </form>
         </div>
+
+            <table id="dg" class="easyui-datagrid" toolbar="#zh-toolbar"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="status" width="80px" align="center">本经销商编号</th>
+                    <th field="attr1" width="80px" align="center">门店编号</th>
+                    <th field="attr1" width="80px" align="center">门店详细地址</th>
+                    <th field="status" align="center"  width="80px">业务类型</th>
+                    <th field="status" width="80px" align="center">店铺电话</th>
+                    <th field="attr1" width="80px" align="center">移动电话</th>
+                    <th field="attr1" width="80px" align="center">店长/负责人</th>
+                    <th field="status" align="center"  width="80px">开窗选择</th>
+                    <th field="status" width="80px" align="center">价格策略</th>
+                    <th field="attr1" width="80px" align="center">租金/月</th>
+                    <th field="attr1" width="80px" align="center">建筑面积</th>
+                    <th field="status" align="center"  width="80px">开户行</th>
+                    <th field="status" width="80px" align="center">银行账号</th>
+                    <th field="attr1" width="80px" align="center">银行户名</th>
+                    <th field="attr1" width="80px" align="center">卖场客户编号</th>
+                    <th field="status" align="center"  width="80px">工商注册编号</th>
+                    <th field="status" align="center"  width="80px">审核状态</th>
+                    <th field="status" align="center"  width="80px">审核人</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
     </div>
 </div>
+<script type="text/javascript">
+var url;
+    function openAdd(){
+        $('#my-dialog').dialog('open').dialog('setTitle','店铺信息');
+        $('#zhw-form').form('clear')
+    }
+
+    function openEdit(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $('#my-dialog').dialog('open').dialog('setTitle','修改用户信息');
+            $('#zhw-form').form('load',row);
+            console.log(row)
+            url = 'update_user.php?id='+row.id;
+        }
+    }
+    function saveUser(){
+        $('#zhw-form').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (result.success){
+                    $('#dlg').dialog('close');		// close the dialog
+                    $('#dg').datagrid('reload');	// reload the user data
+                } else {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.msg
+                    });
+                }
+            }
+        });
+    }
+    function remove(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('提示','你是否要删除此用户信息?',function(r){
+                if (r){
+                    $.post('remove_user.php',{id:row.id},function(result){
+                        if (result.success){
+                            $('#dg').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.msg
+                            });
+                        }
+                    },'json');
+                }
+            });
+        }
+    }
+</script>

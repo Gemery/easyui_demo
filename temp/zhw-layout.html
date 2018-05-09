@@ -1,31 +1,154 @@
+<link rel="stylesheet" type="text/css" href="../css/form-style.css" />
+
 <div class="easyui-layout" data-options="fit:true">
-	<div class="easyui-panel pd5" data-options="fit:true,border:true">
-        <div id="zhw-toolbar" >
+    <div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="newUser()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editUser()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeUser()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <form id="zhw-form" method="post">
-                <table>
-                    <tr>
-                        <td  align="right">职位编号:</td>
-                        <td><input type="text" name="text_s_p01" class="wu-text" /></td>
+            <table id="tt" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true" width="200px"></th>
+                    <th field="s_p01" width="200px" align="center">职位编号</th>
+                    <th field="s_p02" width="200px" align="center">职务名称</th>
+                    <th field="attr1" width="200px" align="center">部门</th>
+                    <th field="status" align="center"  width="200px"
+                        editor="{type:'checkbox',options:{on:'P',off:''}}">经销商代码</th>
 
-                    </tr>
-                    <tr>
-                        <td align="right">职位名称:</td>
-                        <td><input type="text" name="text_s_p02" class="wu-text" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right">本经销商代码:</td>
-                        <td><input type="text" name="text_s_p00" class="wu-text" /></td>
-                    </tr>
-                </table>
-            </form>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+                 closed="true" buttons="#dlg-buttons">
+                <div class="ftitle">用户信息</div>
+                <form id="fm" method="post" novalidate>
+                    <div class="fitem">
+                        <label>职位编号:</label>
+                        <input name="s_p01" class="easyui-validatebox" required="true">
+                    </div>
+                    <div class="fitem">
+                        <label>职位名称:</label>
+                        <input name="s_p02" class="easyui-validatebox" required="true">
+                    </div>
+                    <div class="fitem">
+                            <label>部 门:</label>
+                        <input name="s_p03">
+                    </div>
+                    <div class="fitem">
+                        <label>经销商代码:</label>
+                        <input name="s_p04" class="easyui-validatebox" validType="email">
+                    </div>
+                </form>
+            </div>
+            <div id="dlg-buttons">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+            </div>
+
         </div>
     </div>
-    </div>
 </div>
+</div>
+
+<script type="text/javascript">
+    function formatAction(value,row,index){
+
+            var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+            var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+            return e+d;
+
+    }
+</script>
+<script type="text/javascript">
+
+    var url;
+    function newUser(){
+        $('#dlg').dialog('open').dialog('setTitle','添加用户');
+        $('#fm').form('clear');
+        url = 'save_user.php';
+    }
+    function editUser(){
+        var row = $('#tt').datagrid('getSelected');
+        if (row){
+            $('#dlg').dialog('open').dialog('setTitle','修改用户信息');
+            $('#fm').form('load',row);
+            console.log(row)
+            url = 'update_user.php?id='+row.id;
+        }else{
+            $.messager.alert('信息提示','请选择其中的一条','info');
+        }
+    }
+    function saveUser(){
+        $('#fm').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (result.success){
+                    $('#dlg').dialog('close');		// close the dialog
+                    $('#dg').datagrid('reload');	// reload the user data
+                } else {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.msg
+                    });
+                }
+            }
+        });
+    }
+    function removeUser(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('提示','你是否要删除此用户信息?',function(r){
+                if (r){
+                    $.post('remove_user.php',{id:row.id},function(result){
+                        if (result.success){
+                            $('#dg').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.msg
+                            });
+                        }
+                    },'json');
+                }
+            });
+        }
+    }
+
+    function getRowIndex(target){
+        var tr = $(target).closest('tr.datagrid-row');
+        return parseInt(tr.attr('datagrid-row-index'));
+    }
+    function editrow(target){
+
+        $('#dlg').dialog('open').dialog('setTitle','添加用户');
+        $('#fm').form('clear');
+       // $('#tt').datagrid('beginEdit', getRowIndex(target));
+    }
+    function deleterow(target){
+        $.messager.confirm('Confirm','Are you sure?',function(r){
+            if (r){
+                $('#tt').datagrid('deleteRow', getRowIndex(target));
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+</script>

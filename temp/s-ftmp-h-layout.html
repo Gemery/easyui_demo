@@ -1,0 +1,128 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRow()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editRow()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeRow()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <table id="ftmp-grid" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <!--由凭证模板编号的不同产生 表-->
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="attr1" width="80px" align="center">经销商编号</th>
+                    <th field="status" width="80px" align="center">名店编号</th>
+                    <th field="attr1" width="80px" align="center">凭证模板编号</th>
+                    <th field="status" align="center"  width="80px">模板名称</th>
+                    <th field="attr1" width="80px" align="center">凭证字</th>
+                    <th field="attr1" width="80px" align="center">类型</th>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+            <div id="dlg-ftmp" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:600px; padding:10px;">
+                <form id="ftmp-form" method="post">
+                    <table>
+                        <tr>
+                            <td  align="right">经销商编号:</td>
+                            <td><input type="text" name="s_zx01" class="dm" /></td>
+                            <td align="right">店铺编号:</td>
+                            <td><input type="text" name="s_zx02" class="dm"/></td>
+                        </tr>
+                        <tr>
+                            <td align="right">类型:</td>
+                            <td>
+                            <select class="easyui-combobox" panelHeight="auto" style="width:100px">
+
+                                <option value="1">应收账款</option>
+                                <option value="2">应付账款</option>
+                                <option value="3">销售费用</option>
+                                <option value="4">采购费用</option>
+                                <option value="5">其他费用</option>
+                            </select>
+                            </td>
+                            <td align="right">凭证模板编号:</td>
+                            <td><input type="text" name="s_zx04" class="dm" /></td>
+                        </tr>
+
+                        <tr>
+                            <td align="right">模板名称:</td>
+                            <td><input type="text" name="s_zx05"  class="dm easyui-datebox" /></td>
+                            <td align="right">凭证字:</td>
+                            <td><input type="text" name="s_zx06" class="dm" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <table id="ftmp-grid-e" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   url="datafrid2_getdata.php"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <!--由凭证模板编号的 单身表-->
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="attr1" width="80px" align="center">凭证模板编号</th>
+                    <th field="status" width="80px" align="center">科目来源</th>
+                    <th field="attr1" width="80px" align="center">科目编号</th>
+                    <th field="status" align="center"  width="80px">借贷方向</th>
+                    <th field="attr1" width="80px" align="center">金额来源</th>
+                    <th field="attr1" width="80px" align="center">摘要</th>
+                    <th field="attr1" width="80px" align="center">核算项目</th>
+                    <th field="action" width="100" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    function formatAction(value,row,index){
+            var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+            var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+            return e+d;
+
+    }
+
+    function getRowIndex(target){
+        var tr = $(target).closest('tr.datagrid-row');
+        return parseInt(tr.attr('datagrid-row-index'));
+    }
+
+    function addRow(){
+        //$('#dlg').dialog('open').dialog('setTitle','add a row')
+
+        $('#dlg-ftmp').dialog({
+            closed: false,
+            modal:true,
+            title: "凭证模板单头",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#dlg-ftmp').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#dlg-ftmp').dialog('close');
+                }
+            }]
+        });
+    }
+
+    function editRow(target){
+
+        $('#dlg-ftmp').dialog('open').dialog('setTitle','编辑凭证模板');
+        $('#form-ftmp').form('clear');
+       // $('#tt').datagrid('beginEdit', getRowIndex(target));
+    }
+
+</script>

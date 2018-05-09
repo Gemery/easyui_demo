@@ -2,43 +2,73 @@
 	<div class="easyui-panel pd5" data-options="fit:true,border:true">
         <div id="zhw-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
-                <label>关键词：</label><input class="wu-text" style="width:100px">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+                <strong>个人信息</strong>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editUser()" plain="true">修改</a>
             </div>
-            <form id="zhw-form" method="post">
-                <table>
-                    <tr>
-                        <td  align="right">登录用户代码:</td>
-                        <td><input type="text" name="s_zx01" class="wu-text" /></td>
-                        <td align="right">登录用户名:</td>
-                        <td><input type="text" name="s_zx02" class="wu-text" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right">部门:</td>
-                        <td><input type="text" name="s_zx03" class="wu-text" /></td>
-                        <td align="right">职位:</td>
-                        <td><input type="text" name="s_zx04" class="wu-text" /></td>
-                    </tr>
 
-                    <tr>
-                        <td align="right">权限组编号:</td>
-                        <td><input type="text" name="s_zx05" class="wu-text" /></td>
-                        <td align="right">店铺编号:</td>
-                        <td><input type="text" name="s_zx06" class="wu-text" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right">建立日期:</td>
-                        <td><input type="text" name="s_zxdate" class="wu-text easyui-datebox" /></td>
-                        <td align="right">禁用否:</td>
-                        <td><input type="text" name="s_forbid" class="wu-text" />（Y: 禁用，N:正常使用）</td>
+            <div id="user_info_edit" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:900px; padding:10px;">
+                <form id="zhw-form1" method="post">
+                    <table>
+                        <tr>
+                            <td  align="right">登录用户代码:</td>
+                            <td><input type="text" name="s_zx01" class="wu-text" /></td>
+                            <td align="right">登录用户名:</td>
+                            <td><input type="text" name="s_zx02" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">部门:</td>
+                            <td><input type="text" name="s_zx03" class="wu-text" /></td>
+                            <td align="right">职位:</td>
+                            <td><input type="text" name="s_zx04" class="wu-text" /></td>
+                        </tr>
 
+                        <tr>
+                            <td align="right">权限组编号:</td>
+                            <td><input type="text" name="s_zx05" class="wu-text" /></td>
+                            <td align="right">店铺编号:</td>
+                            <td><input type="text" name="s_zx06" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">建立日期:</td>
+                            <td><input type="text" name="s_zxdate" class="wu-text easyui-datebox" /></td>
+                            <td align="right">禁用否:</td>
+                            <td><input type="text" name="s_forbid" class="wu-text" />（Y: 禁用，N:正常使用）</td>
+
+                        </tr>
+                        <tr>
+                            <td align="right">加密:</td>
+                            <td><input type="text" name="s_zx08" class="wu-text" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div style="padding: 20px 0 0 30px;">
+                <table style="height: 22px; line-height: 22px">
+                    <tr>
+                        <td  align="left">登录用户代码:xxxxxxxx</td>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">登录用户名:xxxx</td>
                     </tr>
                     <tr>
-                        <td align="right">加密:</td>
-                        <td><input type="text" name="s_zx08" class="wu-text" /></td>
+                        <td align="left" style="padding: 10px 0">部门:xxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">职位:xxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">权限组编号:xxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">店铺编号:xxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">建立日期:xxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">禁用否:xxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="padding: 10px 0">加密:xxxxxxx</td>
                     </tr>
                 </table>
             </form>
@@ -46,3 +76,26 @@
     </div>
     </div>
 </div>
+<script type="text/javascript">
+    // 打开编辑窗口
+    function editUser(){
+        $('#user_info_edit').dialog({
+            closed: false,
+            modal:true,
+            title: "修改个人信息",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#user_info_edit').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#user_info_edit').dialog('close');
+                }
+            }]
+        });
+    }
+</script>
