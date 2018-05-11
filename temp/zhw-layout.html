@@ -28,31 +28,28 @@
             </table>
 
 
-            <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-                 closed="true" buttons="#dlg-buttons">
-                <div class="ftitle">用户信息</div>
-                <form id="fm" method="post" novalidate>
-                    <div class="fitem">
-                        <label>职位编号:</label>
-                        <input name="s_p01" class="easyui-validatebox" required="true">
-                    </div>
-                    <div class="fitem">
-                        <label>职位名称:</label>
-                        <input name="s_p02" class="easyui-validatebox" required="true">
-                    </div>
-                    <div class="fitem">
-                            <label>部 门:</label>
-                        <input name="s_p03">
-                    </div>
-                    <div class="fitem">
-                        <label>经销商代码:</label>
-                        <input name="s_p04" class="easyui-validatebox" validType="email">
-                    </div>
+            <div id="dialog" class="easyui-dialog"
+                 data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+                <form id="form" method="post">
+                    <table>
+                        <tr>
+                            <td width="60" align="right">姓 名:</td>
+                            <td><input type="text" name="name" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">邮 箱:</td>
+                            <td><input type="text" name="email" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">主 题:</td>
+                            <td><input type="text" name="subject" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td valign="top" align="right">内 容:</td>
+                            <td><textarea name="content" rows="6" class="wu-textarea" style="width:260px"></textarea></td>
+                        </tr>
+                    </table>
                 </form>
-            </div>
-            <div id="dlg-buttons">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
             </div>
 
         </div>
@@ -73,8 +70,8 @@
 
     var url;
     function newUser(){
-        $('#dlg').dialog('open').dialog('setTitle','添加用户');
-        $('#fm').form('clear');
+        $('#dialog').dialog('open');
+        $('#form').form('clear');
         url = 'save_user.php';
     }
     function editUser(){

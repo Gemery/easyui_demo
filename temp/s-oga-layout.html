@@ -1,18 +1,20 @@
 <div class="easyui-layout" data-options="fit:true">
     <div data-options="region:'center',border:false">
         <!-- Begin of toolbar -->
-        <div id="zhw-toolbar1" >
+        <div id="oga-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="ogaAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="ogaEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmOga()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <form id="zhw-form" method="post">
+            <div id="oga-dialog" class="easyui-dialog"
+            data-options="closed:true" style="width: 800px">
+            <form id="oga-form" method="post">
                 <table>
                     <tr>
-                        <td  align="right" style="width: 60px;">经销商代码:</td>
+                        <td  align="right" style="width: 80px;">经销商代码:</td>
                         <td><input type="text" name="s_oga00" class="wu-text" /></td>
                         <td align="right">门店编号:</td>
                         <td><input type="text" name="s_oga_code" class="wu-text" /></td>
@@ -21,7 +23,7 @@
                     <tr>
                         <td  align="right" style="width: 60px;">出库单类型:</td>
                         <td><input type="text" name="s_oga_type"
-                                   class="wu-text" style="width: 60px;"/>(1：零售；2：工程；3：售后) </td>
+                                   class="wu-text" style="width: 120px;"/>(1：零售；2：工程；3：售后) </td>
                     </tr>
                     <tr>
                         <td align="right">出库单编号:</td>
@@ -99,9 +101,10 @@
                     </tr>
                 </table>
             </form>
+            </div>
         </div>
 
-        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
+        <table id="oga-datagrid" class="easyui-datagrid" toolbar="#oga-toolbar"
                url="datafrid2_getdata.php"
                rownumbers="true" pagination="true">
             <thead>
@@ -133,35 +136,27 @@
 </div>
 <script type="text/javascript">
 
-    /**
-     * Name 分页过滤器
-     */
-    function pagerFilter(data){
-        if (typeof data.length == 'number' && typeof data.splice == 'function'){// is array
-            data = {
-                total: data.length,
-                rows: data
-            }
-        }
-        var dg = $(this);
-        var opts = dg.datagrid('options');
-        var pager = dg.datagrid('getPager');
-        pager.pagination({
-            onSelectPage:function(pageNum, pageSize){
-                opts.pageNumber = pageNum;
-                opts.pageSize = pageSize;
-                pager.pagination('refresh',{pageNumber:pageNum,pageSize:pageSize});
-                dg.datagrid('loadData',data);
-            }
-        });
-        if (!data.originalRows){
-            data.originalRows = (data.rows);
-        }
-        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
-        var end = start + parseInt(opts.pageSize);
-        data.rows = (data.originalRows.slice(start, end));
-        return data;
-    }
+   function ogaAdd(){
+       $('#oga-dialog').dialog({
+           closed:false,
+           modal:true,
+           title:'添加销售记录信息',
+           buttons:[{
+               text:'保存',
+               iconCls:'icon-ok',
+               handler:function(){
+                   $('#oga-dialog').dialog('close')
+               }
+           },{
+               text:'取消',
+               iconCls:'icon-cancel',
+               handler:function () {
+                   $('#oga-dialog').dialog('close')
+
+               }
+           }]
+       })
+   }
 
 
 </script>

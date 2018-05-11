@@ -1,0 +1,128 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'center',border:false">
+        <div id="sdt-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="sdtAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="sdtEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmSdt()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <div id="sdt-dialog" style="width:800px;" class="easyui-dialog" data-options="closed:true">
+            <form id="sdt-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width:80px;">经销商代码:</td>
+                        <td><input type="text" name="s_sdt_h00" class="wu-text" /></td>
+                        <td align="right">店铺编号:</td>
+                        <td><input type="text" name="s_sdt_hcode" class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">配送单单号:</td>
+                        <td><input type="text" name="s_sdt_h01" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">配送日期:</td>
+                        <td><input type="text" name="s_sdt_h02" class="wu-text" /></td>
+                        <td align="right">客服手机号码:</td>
+                        <td><input type="text" name="s_sdt_h03" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width:80px;">客户的姓名:</td>
+                        <td><input type="text" name="s_pb05" class="wu-text" /></td>
+                        <td align="right">收货详细地址:</td>
+                        <td><input type="text" name="s_pb06" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">拍摄司机:</td>
+                        <td><input type="text" name="s_ph07" class="wu-text easyui-datebox" /></td>
+                        <td align="right">司机的手机号码:</td>
+                        <td><input type="text" name="s_ph08" class="wu-text easyui-datebox" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">配送车牌号:</td>
+                        <td><input type="text" name="s_ph09" class="wu-text" /></td>
+                        <td align="right">发货创库代码:</td>
+                        <td><input type="text" name="s_ph10" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">发货创库地址:</td>
+                        <td><input type="text" name="s_ph11" class="wu-text" /></td>
+                        <td align="right">备注:</td>
+                        <td><input type="text" name="s_sdt_hnote" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">是否同时需要安装:</td>
+                        <td><input type="text" name="s_ph11" class="wu-text" /></td>
+                        <td align="right">安装师傅:</td>
+                        <td><input type="text" name="s_sdt_hnote" class="wu-text" />()</td>
+                    </tr>
+                    <tr>
+                        <td align="right">安装师傅手机号码:</td>
+                        <td><input type="text" name="s_ph11" class="wu-text" /></td>
+                        <td align="right">送达确认:</td>
+                        <td><input type="text" name="s_sdt_h14" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">制单人:</td>
+                        <td><input type="text" name="s_ph11" class="wu-text" /></td>
+                        <td align="right">审核状态:</td>
+                        <td><input type="text" name="s_sdt_hnote" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核日期:</td>
+                        <td><input type="text" name="s_ph11" class="wu-text easyui-datebox" /></td>
+                    </tr>
+                </table>
+            </form>
+            </div>
+        </div>
+        <table id="datagrid-table" class="easyui-datagrid" toolbar="#sdt-toolbar"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th field="itemid" width="80">价格条件编号</th>
+                <th field="productid" width="80">项次</th>
+                <th field="listprice" width="80" align="right">物料代码</th>
+                <th field="unitcost" width="80" align="right">物料名称</th>
+                <th field="attr1" width="80">型号</th>
+                <th field="status" width="60" align="center">规格</th>
+                <th field="attr1" width="80">型号</th>
+                <th field="status" width="60" align="center">单位</th>
+                <th field="attr1" width="80">生效日期</th>
+                <th field="status" width="60" align="center">失效日期</th>
+                <th field="attr1" width="80">折扣</th>
+                <th field="status" width="60" align="center">是否参与积分</th>
+                <th field="status" width="60" align="center">销售提成点数</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function sdtAdd(){
+        $('#sdt-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加配送任务单单头',
+            buttons:[{
+                text:'保存',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#sdt-dialog').dialog('close');
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-cancel',
+                handler:function(){
+                    $('#sdt-dialog').dialog('close')
+                }
+            }]
+        })
+    }
+
+</script>

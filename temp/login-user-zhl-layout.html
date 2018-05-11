@@ -6,38 +6,39 @@
                 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editUser()" plain="true">修改</a>
             </div>
 
-            <div id="user_info_edit" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:900px; padding:10px;">
+            <div id="user_info_edit" class="easyui-dialog"
+                 data-options="closed:true,iconCls:'icon-save'" style="width:600px; padding:10px;">
                 <form id="zhw-form1" method="post">
                     <table>
                         <tr>
-                            <td  align="right">登录用户代码:</td>
-                            <td><input type="text" name="s_zx01" class="wu-text" /></td>
-                            <td align="right">登录用户名:</td>
-                            <td><input type="text" name="s_zx02" class="wu-text" /></td>
+                            <td  align="right" style="width:80px">登录用户代码:</td>
+                            <td><input type="text" name="s_zx01" class="dw" /></td>
+                            <td align="right" style="width:80px">登录用户名:</td>
+                            <td><input type="text" name="s_zx02" class="dw" /></td>
                         </tr>
                         <tr>
                             <td align="right">部门:</td>
-                            <td><input type="text" name="s_zx03" class="wu-text" /></td>
+                            <td><input type="text" name="s_zx03" class="dw" /></td>
                             <td align="right">职位:</td>
-                            <td><input type="text" name="s_zx04" class="wu-text" /></td>
+                            <td><input type="text" name="s_zx04" class="dw" /></td>
                         </tr>
 
                         <tr>
                             <td align="right">权限组编号:</td>
-                            <td><input type="text" name="s_zx05" class="wu-text" /></td>
+                            <td><input type="text" name="s_zx05" class="dw" /></td>
                             <td align="right">店铺编号:</td>
-                            <td><input type="text" name="s_zx06" class="wu-text" /></td>
+                            <td><input type="text" name="s_zx06" class="dw" /></td>
                         </tr>
                         <tr>
                             <td align="right">建立日期:</td>
-                            <td><input type="text" name="s_zxdate" class="wu-text easyui-datebox" /></td>
+                            <td><input type="text" name="s_zxdate" class="dw easyui-datebox" /></td>
                             <td align="right">禁用否:</td>
-                            <td><input type="text" name="s_forbid" class="wu-text" />（Y: 禁用，N:正常使用）</td>
+                            <td><input type="text" name="s_forbid" class="xw" />（Y: 禁用，N:正常使用）</td>
 
                         </tr>
                         <tr>
                             <td align="right">加密:</td>
-                            <td><input type="text" name="s_zx08" class="wu-text" /></td>
+                            <td><input type="text" name="s_zx08" class="dw" /></td>
                         </tr>
                     </table>
                 </form>

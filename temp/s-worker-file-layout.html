@@ -1,21 +1,24 @@
 <div class="easyui-layout" data-options="fit:true">
     <div class="easyui-panel pd5" data-options="fit:true,border:true">
-        <div id="zhw-toolbar" >
+        <div id="workder-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openEmp()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editEmp()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeEmp()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <form id="zhw-form" method="post">
+            <div id="emp-dialog" data-options="closed:true"
+                 class="easyui-dialog" style="width: 400px;padding: 10px;">
+            <form id="emp-form" method="post">
                 <table>
                     <tr>
-                        <td  align="right" style="width: 60px;">所属经销商代码:</td>
+                        <td  align="right" class="dw" ">所属经销商代码:</td>
                         <td><input type="text" name="sw_occ00" class="wu-text" /></td>
+                    </tr>
+                    <tr>
                         <td align="right">员工编号:</td>
                         <td><input type="text" name="sw_code" class="wu-text" /></td>
-
                     </tr>
                     <tr>
                         <td align="right">姓名:</td>
@@ -24,29 +27,76 @@
                     <tr>
                         <td align="right">性别:</td>
                         <td><input type="text" name="sw_sex" class="wu-text" /></td>
+                    </tr><tr>
                         <td align="right">身份证号码:</td>
                         <td><input type="text" name="sw_card" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">部门:</td>
                         <td><input type="text" name="sw_department" class="wu-text" /></td>
+                    </tr>
+                    <tr>
                         <td align="right">职位:</td>
                         <td><input type="text" name="sw_posit" class="wu-text" /></td>
-
                     </tr>
-
                     <tr>
                         <td align="right">电话:</td>
                         <td><input type="text" name="sw_phone" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">员工在职状态:</td>
-                        <td><input type="text" name="sw_status" class="wu-text" />(Y:在职,N:离职)</td>
+                        <td><select style="width: 150px;">
+                            <option value="Y">在职</option>
+                            <option value="N">离职</option>
+                            </select></td>
                     </tr>
 
                 </table>
             </form>
+            </div>
         </div>
+        <table id="worker-datagrid" class="easyui-datagrid" toolbar="worker-toolbar"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th field="itemid" width="80">所属经销商</th>
+                <th field="productid" width="80">店铺编号</th>
+                <th field="unitcost" width="80" align="center">员工编号</th>
+                <th field="unitcost" width="80" align="center">姓名</th>
+                <th field="attr1" width="80">性别</th>
+                <th field="status" width="120">身份证号码</th>
+                <th field="attr1" width="80">部门</th>
+                <th field="status" width="120" >职位</th>
+                <th field="attr1" width="80">失效日期</th>
+                <th field="unitcost" width="80" align="center">电话</th>
+                <th field="attr1" width="80">在职否</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 </div>
-</div>
+<script type="text/javascript">
+
+    function openEmp(){
+        $('#emp-dialog').dialog({
+            closed: false,
+            modal:true,
+            title: "价格信息添加",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#emp-dialog').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#emp-dialog').dialog('close');
+                }
+            }]
+        });
+    }
+</script>

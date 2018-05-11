@@ -2,42 +2,44 @@
 	<div class="easyui-panel pd5" data-options="fit:true,border:true">
         <div id="zhw-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addOccUser()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editOccUser()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmOccUser()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <form id="zhw-form" method="post">
+            <div id="occ-dialog" class="easyui-dialog"
+                 data-options="closed:true" style="width: 600px;padding: 10px;">
+            <form id="occ-form" method="post">
                 <table>
                     <tr>
                         <td  align="right" style="width: 60px;">所属经销商代码:</td>
-                        <td><input type="text" name="s_occ00" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ00" class="dw" /></td>
                         <td align="right">客户姓名:</td>
-                        <td><input type="text" name="ss_occ02" class="wu-text" /></td>
+                        <td><input type="text" name="ss_occ02" class="dw" /></td>
 
                     </tr>
                     <tr>
                         <td align="right">客户电话:</td>
-                        <td><input type="text" name="ss_occ03" class="wu-text" /></td>
+                        <td><input type="text" name="ss_occ03" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">客户收货地址:</td>
-                        <td><input type="text" name="s_occ04" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ04" class="dw" /></td>
                         <td align="right">建立资料时间:</td>
-                        <td><input type="text" name="s_occ05" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_occ05" class="dw easyui-datebox" /></td>
                     </tr>
                     <tr>
                         <td align="right">客户微信号:</td>
-                        <td><input type="text" name="s_occ06" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ06" class="dw" /></td>
                         <td align="right">客户VIP账号:</td>
-                        <td><input type="text" name="s_occ07" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ07" class="dw" /></td>
 
                     </tr>
 
                     <tr>
                         <td align="right">结算方式:</td>
-                        <td><input type="text" name="s_occ08" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ08" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">客户类型:</td>
@@ -48,21 +50,74 @@
                             <option value="3">工程客户</option>
                         </select></td>
                         <td align="right">客户开票资料:</td>
-                        <td><input type="text" name="s_occ09" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ09" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">对应业务员:</td>
-                        <td><input type="text" name="s_occ10" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ10" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">对应业务员:</td>
-                        <td><input type="text" name="s_occ11" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ11" class="dw" /></td>
                         <td align="right">积分总数:</td>
-                        <td><input type="text" name="s_occ12" class="wu-text" /></td>
+                        <td><input type="text" name="s_occ12" class="dw" /></td>
                     </tr>
                 </table>
             </form>
+            </div>
         </div>
-    </div>
+        <table id="occ-table" class="easyui-datagrid" toolbar="#wu-toolbar4"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <!--的 单身表-->
+                <th field="action" width="100" align="center" formatter="formatAction">操作</th>
+                <th field="attr1" width="80px" align="center">所属经销商代码</th>
+                <th field="status" width="80px" align="center">店铺编号</th>
+                <th field="attr1" width="80px" align="center">客户姓名</th>
+                <th field="status" align="center"  width="80px">手机号</th>
+                <th field="attr1" width="80px" align="center">客户收货地址</th>
+                <th field="attr1" width="80px" align="center">建立资料时间</th>
+                <th field="attr1" width="80px" align="center">客户微信号</th>
+                <th field="status" align="center"  width="80px">客户VIP账号</th>
+                <th field="status" align="center"  width="80px">结算方式</th>
+                <th field="status" align="center"  width="80px">客户类型</th>
+                <th field="status" align="center"  width="80px">客户开票资料</th>
+                <th field="status" align="center"  width="80px">对应业务员</th>
+                <th field="status" align="center"  width="80px">积分总数</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 </div>
+<script>
+
+    function formatAction(value,row,index){
+        var e = '<a href="#" onclick="editrow(this)">编辑</a> ';
+        var d = '<a href="#" onclick="deleterow(this)">删除</a>';
+        return e+d;
+
+    }
+
+    function addOccUser(){
+        $('#occ-dialog').dialog({
+            closed: false,
+            modal:true,
+            title: "凭证模板单头",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#occ-dialog').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#occ-dialog').dialog('close');
+                }
+            }]
+        });
+    }
+</script>

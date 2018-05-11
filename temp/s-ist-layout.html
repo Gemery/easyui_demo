@@ -1,0 +1,118 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'center',border:false">
+        <div id="ist-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="sdtAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="sdtEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmSdt()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <div id="ist-dialog" style="width:850px;" class="easyui-dialog" data-options="closed:true">
+            <form id="ist-form" method="post">
+                <table>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td  align="right" style="width:80px;">经销商代码:</td>
+                        <td><input type="text" name="s_ist_h00" class="wu-text" /></td>
+                        <td align="right">店铺编号:</td>
+                        <td><input type="text" name="s_ist_hcode" class="wu-text" /></td>
+
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">安装工单派工单单号:</td>
+                        <td><input type="text" name="s_ist_h01" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">安装日期:</td>
+                        <td>
+                            <input type="text" name="s_sdt_h02" class="xw easyui-datebox" />到<input type="text" name="s_sdt_h021" class="xw easyui-datebox" />
+                        </td>
+                        <td align="right">客户手机号码:</td>
+                        <td><input type="text" name="s_ist_h03" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right" style="width:80px;">客户的姓名:</td>
+                        <td><input type="text" name="s_ist_h04" class="wu-text" /></td>
+                        <td align="right">上门安装详细地址:</td>
+                        <td><input type="text" name="s_ist_h05" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">安装师傅:</td>
+                        <td><input type="text" name="s_ist_h06" class="wu-text" /></td>
+                        <td align="right">安装师傅手机号码:</td>
+                        <td><input type="text" name="s_ist_h07" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">安装确认否:</td>
+                        <td><input type="text" name="s_ist_h08" class="wu-text" /></td>
+                        <td align="right">制单人:</td>
+                        <td><input type="text" name="s_ist_h09" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">审核状态:</td>
+                        <td><input type="text" name="s_ist_hconfirm" class="wu-text" /></td>
+                        <td align="right">审核人:</td>
+                        <td><input type="text" name="s_ist_h10" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 15px"></tr>
+                    <tr>
+                        <td align="right">审核日期:</td>
+                        <td><input type="text" name="s_ist_h11" class="wu-text" /></td>
+                        <td align="right">制单日期:</td>
+                        <td><input type="text" name="s_ist_hdate" class="wu-text" /></td>
+                    </tr>
+                    <tr style="height: 25px"></tr>
+                </table>
+            </form>
+            </div>
+        </div>
+        <table id="ist-table" class="easyui-datagrid" toolbar="#ist-toolbar"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th field="itemid" width="120">安装工单单号</th>
+                <th field="productid" width="120">项次</th>
+                <th field="listprice" width="120" align="right">商品代码</th>
+                <th field="unitcost" width="120" align="right">商品名称</th>
+                <th field="attr1" width="120">型号</th>
+                <th field="status" width="120" align="center">规格</th>
+                <th field="status" width="120" align="center">单位</th>
+                <th field="attr1" width="120">数量</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function sdtAdd(){
+        $('#ist-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加安装任务单单头',
+            buttons:[{
+                text:'保存',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#ist-dialog').dialog('close');
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-cancel',
+                handler:function(){
+                    $('#ist-dialog').dialog('close')
+                }
+            }]
+        })
+    }
+
+</script>

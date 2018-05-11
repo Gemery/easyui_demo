@@ -1,0 +1,136 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'center',border:false">
+        <!-- Begin of toolbar -->
+        <div id="lock-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="lockAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="lockEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmLock()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <div id="lock-dialog" class="easyui-dialog" data-options="closed:true" style="width:800px">
+            <form id="lock-form" method="post">
+                <table>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td  align="right" style="width: 80px;height:20px;line-height: 20px;">经销商代码:</td>
+                        <td><input type="text" name="s_lock_h00" class="wu-text" /></td>
+                        <td align="right">门店编号:</td>
+                        <td><input type="text" name="S_lock_hcode"  class="wu-text" /></td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td  align="right" style="width:80px;">锁库单号:</td>
+                        <td><input type="text" name="S_lock_h01" class="wu-text dmargin" /></td>
+                        <td align="right">源单单号:</td>
+                        <td><input type="text" name="S_lock_h02" class="wu-text dmargin" /></td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">锁单方式:</td>
+                        <td><select name="s_lock_h03" id="sd" style="width: 150px;">
+                            <option value="1">订单</option>
+                            <option value="2">销售出库单</option>
+                            <option value="3">调拨单</option>
+                        </select>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">源单项次:</td>
+                        <td><input type="text" name="s_lock_e04" class="wu-text" /></td>
+                        <td align="right">物料代码:</td>
+                        <td><input type="text" name="s_lock_e05" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">锁单开始日期:</td>
+                        <td><input type="text" name="s_lock_hsdate" class="wu-text easyui-datebox" style="width:180px"/></td>
+                        <td align="right">锁单结束日期:</td>
+                        <td><input type="text" name="s_lock_hedate" class="wu-text easyui-datebox" style="width:180px"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">操作人员:</td>
+                        <td><input type="text" name="s_lock_huser" class="wu-text" /></td>
+                        <td align="right">审核状态:</td>
+                        <td><input type="text" name="s_lock_hconfirm" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核日期:</td>
+                        <td><input type="text" name="s_lock_h04" class="wu-text easyui-datebox" style="width:180px"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 20px;"></td>
+                    </tr>
+                </table>
+            </form>
+            </div>
+        </div>
+
+        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
+               url="datafrid2_getdata.php"
+               rownumbers="true" pagination="true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th field="itemid" width="80">（锁库单号）备置单号</th>
+                <th field="itemid" width="80">项次</th>
+                <th field="productid" width="80">源单单号</th>
+                <th field="unitcost" width="80" align="right">源单项次</th>
+                <th field="attr1" width="80">物料代码</th>
+                <th field="status" width="60" align="center">物料名称</th>
+                <th field="status" width="60" align="center">型号</th>
+                <th field="attr1" width="80">规格</th>
+                <th field="attr1" width="80">单位</th>
+                <th field="attr1" width="80">锁库数量</th>
+                <th field="status" width="60" align="center">锁库存已处理量</th>
+                <th field="status" width="60" align="center">仓库代码</th>
+                <th field="status" width="60" align="center">仓库库位</th>
+                <th field="status" width="60" align="center"> 批次号</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function lockAdd(){
+        $('#lock-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加锁库记录',
+            buttons:[{
+                text:'保存',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#lock-dialog').dialog('close')
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-cancel',
+                handler:function(){
+                    $('#lock-dialog').dialog('close')
+                }
+            }]
+
+        })
+    }
+</script>

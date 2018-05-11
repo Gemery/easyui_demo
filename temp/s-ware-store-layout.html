@@ -1,0 +1,112 @@
+<div class="easyui-layout" data-options="fit:true">
+	<div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="store-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addStore()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editStore()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeStore()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <div id="store-dialog" style="width: 600px; padding: 10px;"
+            class="easyui-dialog" data-options="closed:true">
+            <form id="store-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width: 70px;">归属上级销商代码:</td>
+                        <td><input type="text" name="ss_occ01" class="dw" /></td>
+                        <td align="right">所属经销商代码:</td>
+                        <td><input type="text" name="ss_occ00" class="dw" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="width: 70px;">所属经销商门店编号:</td>
+                        <td><input type="text" name="ss_est01" class="dw" /></td>
+                        <td align="right">仓库电话:</td>
+                        <td><input type="text" name="ss_phone" class="dw" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">仓库代码:</td>
+                        <td><input type="text" name="ss_code" class="dw" /></td>
+                        <td align="right">仓库名称:</td>
+                        <td><input type="text" name="ss_name" class="dw" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">仓库地址:</td>
+                        <td><input type="text" name="ss_address" class="dw" /></td>
+                        <td align="right">仓库负责人:</td>
+                        <td><input type="text" name="ss_worker" class="dw" /></td>
+
+                    </tr>
+                    <tr>
+                        <td align="right">存货科目:</td>
+                        <td><input type="text" name="ss_subject" class="dw" /></td>
+                        <td align="right">是否有效:</td>
+                        <td><input type="text" name="ss_acti" class="dw" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">资料建立者:</td>
+                        <td><input type="text" name="ss_user" class="dw" /></td>
+                        <td align="right">建立日期:</td>
+                        <td><input type="text" name="ss_date" class="dw easyui-datebox" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">仓库资料审核否:</td>
+                        <td><input type="text" name="ss_confirm" class="dw" /></td>
+                    </tr>
+                </table>
+            </form>
+            </div>
+        </div>
+        <table id="store-table" class="easyui-datagrid" toolbar="#store-toolbar"
+           url="datafrid2_getdata.php"
+           rownumbers="true" pagination="true">
+        <thead>
+        <tr>
+            <!--由凭证模板编号的 单身表-->
+            <th field="ck" checkbox="true" width="80px"></th>
+            <th field="attr1" width="80px" align="center">归属上级销商代码</th>
+            <th field="status" width="80px" align="center">所属经销商代码</th>
+            <th field="attr1" width="80px" align="center">所属经销商门店编号</th>
+            <th field="status" align="center"  width="80px">仓库代码</th>
+            <th field="attr1" width="80px" align="center">仓库名称</th>
+            <th field="attr1" width="80px" align="center">仓库地址</th>
+            <th field="attr1" width="80px" align="center">核算项目</th>
+            <th field="attr1" width="80px" align="center">是否有效</th>
+            <th field="attr1" width="80px" align="center">资料建立者</th>
+            <th field="attr1" width="80px" align="center">建立日期</th>
+            <th field="attr1" width="80px" align="center">仓库资料审核否</th>
+            <th field="action" width="100" align="center" formatter="formatAction">Action</th>
+        </tr>
+        </thead>
+    </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function formatAction(value,row,index){
+        var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+        var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+        return e+d;
+
+    }
+
+    function addStore(){
+        $('#store-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加仓库',
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    $('#store-dialog').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#wu-dialog').dialog('close');
+                }
+            }]
+        });
+    }
+</script>

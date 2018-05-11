@@ -1,7 +1,7 @@
 <div class="easyui-layout" data-options="fit:true">
 	<div data-options="region:'center',border:false">
         <!-- Begin of toolbar -->
-        <div id="wu-toolbar4" >
+        <div id="price-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
@@ -9,71 +9,69 @@
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
+            <div id="price-dialog" data-options="closed:true" class="easyui-dialog" style="width: 600px;padding: 10px;">
             <form id="wu-form-g" method="post">
                 <table>
                     <tr>
                         <td  align="right">所属经销商:</td>
-                        <td><input type="text" name="s_pch00" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch00" class="dw" /></td>
                         <td align="right">店铺编号:</td>
-                        <td><input type="text" name="s_pch01" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch01" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">价格条件编号:</td>
-                        <td><input type="text" name="s_pch02" class="wu-text" /></td>
-                    </tr>
-                    <tr>
+                        <td><input type="text" name="s_pch02" class="dw" /></td>
                         <td align="right">价格条件编号说明描述:</td>
-                        <td><input type="text" name="s_pch02_desc" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch02_desc" class="dw" /></td>
                     </tr>
                     <tr>
                         <td width="70" align="right">录入日期:</td>
-                        <td><input type="text" name="s_pch03" class="wu-text easyui-datebox"/></td>
-                        <td align="right">价格生效日期:</td>
-                        <td><input type="text" name="s_pch04" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_pch03" class="dw easyui-datebox"/></td>
+                        <td align="right">价格生效日</td>
+                        <td><input type="text" name="s_pch04" class="dw easyui-datebox" /></td>
                     </tr>
                     <tr>
                         <td align="right">价格失效日期:</td>
-                        <td><input type="text" name="s_pch05" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_pch05" class="dw easyui-datebox" /></td>
+                        <td align="right">审核日期:</td>
+                        <td><input type="text" name="s_pch07" class="dw easyui-datebox" /></td>
                     </tr>
                     <tr>
                         <td align="right">审核状态:</td>
-                        <td><input type="text" name="s_pch_confirm" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch_confirm" class="dw" /></td>
                         <td align="right">审核人:</td>
-                        <td><input type="text" name="s_pch06" class="wu-text" /></td>
-                    </tr>
-                    <tr>
-                        <td align="right">审核日期:</td>
-                        <td><input type="text" name="s_pch07" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_pch06" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">录入人:</td>
-                        <td><input type="text" name="s_pch08" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch08" class="dw" /></td>
                         <td align="right">职位:</td>
-                        <td><input type="text" name="s_pch0" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch0" class="dw" /></td>
                     </tr>
                     <tr>
-                        <td align="right">职位对应最低折扣:</td>
-                        <td><input type="text" name="s_pch10" class="wu-text" />输入数值</td>
-                        <td align="right">职位权限对应最高折扣:</td>
-                        <td><input type="text" name="s_pch11" class="wu-text" />输入数值</td>
+                        <td align="right" width="70px">职位对应最低折扣:</td>
+                        <td><input type="text" name="s_pch10" class="xw" />输入数值</td>
+                        <td align="right" width="70px">职位权限对应最高折扣:</td>
+                        <td><input type="text" name="s_pch11" class="xw" />输入数值</td>
                     </tr>
                     <tr>
                         <td align="right">是否特殊活动价:</td>
-                        <td><input type="text" name="s_pch13" class="wu-text" />（Y:\N）</td>
+                        <td><input type="text" name="s_pch13" class="dw" />（Y:\N）</td>
                         <td align="right">特殊活动价格编号:</td>
-                        <td><input type="text" name="ts-jg-bh" class="wu-text" /></td>
+                        <td><input type="text" name="ts-jg-bh" class="dw" /></td>
 
                     </tr>
                     <tr>
                         <td align="right">最近修改人:</td>
-                        <td><input type="text" name="s_pch14" class="wu-text" /></td>
+                        <td><input type="text" name="s_pch14" class="dw" /></td>
                         <td align="right">最近修改日期:</td>
-                        <td><input type="text" name="s_pch15" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_pch15" class="dw easyui-datebox" /></td>
                     </tr>
                 </table>
             </form>
+            </div>
         </div>
-        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
+        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="price-toolbar"
            url="datafrid2_getdata.php"
            rownumbers="true" pagination="true">
         <thead>
@@ -81,23 +79,43 @@
             <th field="ck" checkbox="true"></th>
             <th field="itemid" width="80">价格条件编号</th>
             <th field="productid" width="80">项次</th>
-            <th field="listprice" width="80" align="right">物料代码</th>
-            <th field="unitcost" width="80" align="right">物料名称</th>
+            <th field="listprice" width="80" >物料代码</th>
+            <th field="unitcost" width="80" >物料名称</th>
             <th field="attr1" width="80">型号</th>
-            <th field="status" width="60" align="center">规格</th>
+            <th field="status" width="60" >规格</th>
             <th field="attr1" width="80">型号</th>
-            <th field="status" width="60" align="center">单位</th>
+            <th field="status" width="60" >单位</th>
             <th field="attr1" width="80">生效日期</th>
-            <th field="status" width="60" align="center">失效日期</th>
+            <th field="status" width="60">失效日期</th>
             <th field="attr1" width="80">折扣</th>
-            <th field="status" width="60" align="center">是否参与积分</th>
-            <th field="status" width="60" align="center">销售提成点数</th>
+            <th field="status" width="60">是否参与积分</th>
+            <th field="status" width="60">销售提成点数</th>
         </tr>
         </thead>
     </table>
     </div>
 </div>
 <script type="text/javascript">
+    function openAdd(){
+        $('#price-dialog').dialog({
+            closed: false,
+            modal:true,
+            title: "价格信息添加",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#price-dialog').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#price-dialog').dialog('close');
+                }
+            }]
+        });
+    }
 
 
 

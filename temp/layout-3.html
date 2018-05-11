@@ -1,7 +1,7 @@
 <div class="easyui-layout" data-options="fit:true">
     <div data-options="region:'center',border:false">
         <!-- Begin of toolbar -->
-        <div id="zhw-toolbar1" >
+        <div id="base-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
@@ -9,104 +9,97 @@
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
+            <div id="pc-dialog" class="easyui-dialog"
+                 data-options="closed:true" style="width: 500px; padding: 10px;">
             <form id="zhw-form" method="post">
                 <table>
                     <tr>
                         <td  align="right" style="width: 60px;">所属经销商代码:</td>
-                        <td><input type="text" name="s_pb00" class="wu-text" /></td>
+                        <td><input type="text" name="s_pb00" class="dw" /></td>
                         <td align="right">项次:</td>
-                        <td><input type="text" name="s_pb01" class="wu-text" /></td>
+                        <td><input type="text" name="s_pb01" class="dw" /></td>
 
                     </tr>
                     <tr>
                         <td align="right">物料代码:</td>
-                        <td><input type="text" name="" class="wu-text" /></td>
+                        <td><input type="text" name="s_pb02" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">物料名称:</td>
-                        <td><input type="text" name="s_ph03" class="wu-text" /></td>
+                        <td><input type="text" name="s_ph03" class="dw" /></td>
                         <td align="right">物料型号:</td>
-                        <td><input type="text" name="s_pb04" class="wu-text" /></td>
+                        <td><input type="text" name="s_pb04" class="dw" /></td>
                     </tr>
                     <tr>
                         <td align="right">规格:</td>
-                        <td><input type="text" name="s_pb05" class="wu-text" /></td>
+                        <td><input type="text" name="s_pb05" class="dw" /></td>
                         <td align="right">单位:</td>
-                        <td><input type="text" name="s_pb06" class="wu-text" /></td>
-                    </tr>
+                        <td><input type="text" name="s_pb06" class="dw" /></td>
                     <tr>
                         <td align="right">生效日期:</td>
-                        <td><input type="text" name="s_ph07" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_ph07" class="dw easyui-datebox" /></td>
                         <td align="right">失效日期:</td>
-                        <td><input type="text" name="s_ph08" class="wu-text easyui-datebox" /></td>
+                        <td><input type="text" name="s_ph08" class="dw easyui-datebox" /></td>
                     </tr>
                     <tr>
                         <td align="right">单价:</td>
-                        <td><input type="text" name="s_ph09" class="wu-text" /></td>
+                        <td><input type="text" name="s_ph09" class="dw" /></td>
                         <td align="right">折扣:</td>
-                        <td><input type="text" name="s_ph10" class="wu-text" />(数值)</td>
+                        <td><input type="text" name="s_ph10" class="dw" />(数值)</td>
                     </tr>
                     <tr>
                         <td align="right">是否参与积分:</td>
-                        <td><input type="text" name="s_ph11" class="wu-text" /></td>
+                        <td><input type="text" name="s_ph11" class="dw" /></td>
                         <td align="right">店铺编号:</td>
-                        <td><input type="text" name="s_ph12" class="wu-text" /></td>
+                        <td><input type="text" name="s_ph12" class="dw" /></td>
                     </tr>
 
                 </table>
             </form>
+            </div>
         </div>
-        <table id="wu-datagrid4" class="easyui-datagrid" toolbar="#wu-toolbar4"
+        <table id="base-datagrid" class="easyui-datagrid" toolbar="base-toolbar"
                url="datafrid2_getdata.php"
                rownumbers="true" pagination="true">
             <thead>
             <tr>
                 <th field="ck" checkbox="true"></th>
-                <th field="itemid" width="80">序号</th>
-                <th field="productid" width="80">物料明细代码</th>
-                <th field="unitcost" width="80" align="right">物料名称</th>
-                <th field="attr1" width="80">型号</th>
+                <th field="itemid" width="80">所属经销商</th>
+                <th field="productid" width="80">项次</th>
+                <th field="unitcost" width="80" align="center">物料代码</th>
+                <th field="unitcost" width="80" align="center">物料名称</th>
+                <th field="attr1" width="80">物料型号</th>
                 <th field="status" width="60" align="center">规格</th>
-                <th field="attr1" width="80">描述</th>
-                <th field="status" width="60" align="center">数量</th>
-                <th field="attr1" width="80">备注</th>
-                <th field="status" width="60" align="center">明细价格</th>
-                <th field="attr1" width="80">明细金额</th>
+                <th field="attr1" width="80">单位</th>
+                <th field="status" width="60" align="center">生效日期</th>
+                <th field="attr1" width="80">失效日期</th>
+                <th field="status" width="60" align="center">折扣</th>
+                <th field="attr1" width="80">是否参与积分</th>
             </tr>
             </thead>
         </table>
     </div>
 </div>
 <script type="text/javascript">
-
-    /**
-     * Name 分页过滤器
-     */
-    function pagerFilter(data){
-        if (typeof data.length == 'number' && typeof data.splice == 'function'){// is array
-            data = {
-                total: data.length,
-                rows: data
-            }
-        }
-        var dg = $(this);
-        var opts = dg.datagrid('options');
-        var pager = dg.datagrid('getPager');
-        pager.pagination({
-            onSelectPage:function(pageNum, pageSize){
-                opts.pageNumber = pageNum;
-                opts.pageSize = pageSize;
-                pager.pagination('refresh',{pageNumber:pageNum,pageSize:pageSize});
-                dg.datagrid('loadData',data);
-            }
+    function openAdd(){
+        $('#pc-dialog').dialog({
+            closed: false,
+            modal:true,
+            title: "添加基础面价信息",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $('#pc-dialog').dialog('close');
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#pc-dialog').dialog('close');
+                }
+            }]
         });
-        if (!data.originalRows){
-            data.originalRows = (data.rows);
-        }
-        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
-        var end = start + parseInt(opts.pageSize);
-        data.rows = (data.originalRows.slice(start, end));
-        return data;
     }
 
 </script>
