@@ -114,14 +114,20 @@
             }]
         })
     }
+    function getFormData(){
+        var elements = $('#ist-layout').find('input');
 
+
+    }
 
     $(function () {
         $.ajax({
             type:'POST',
             url:'http://192.168.1.251:8091/api/baseData/PositionExq',
             dataType:'json',
-            data:{flage:"1",list:[{"id":0,"s_p00":"300005","s_p01":"0df84539-2f86-464d-a9c0-9b5f46883ba1","s_p02":"ceshi","s_p03":"123","s_p_code":"300005001"}]},
+            data:{flage:"1",list:[{"id":0,"s_p00":"300005",
+                "s_p01":"0df84539-2f86-464d-a9c0-9b5f46883ba1","s_p02":"ceshi",
+                "s_p03":"123","s_p_code":"300005001"}]},
 
             success:function(res){
                 console.log(res);
@@ -132,6 +138,8 @@
             }
 
         });
+        var arr = $('#ist-form').serializeArray();
+        console.log(arr)
     })
 
 </script>
