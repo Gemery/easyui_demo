@@ -2,114 +2,118 @@
 	<div class="easyui-panel pd5" data-options="fit:true,border:true">
         <div id="zhw-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="dpAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="dpEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmDp()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
 
 
-            <div class="easyui-dialog" id="my-dialog"style="width:800px;height:380px;padding:10px 20px"
+            <div class="easyui-dialog" id="dp-dialog"style="width:800px;height:380px;padding:10px 20px"
                           closed="true" buttons="#dlg-buttons">
-            <form id="zhw-form" method="post">
+            <form id="dp-form" method="post">
                 <table>
                     <tr>
                         <td  align="right" style="width: 60px;">本经销商编号:</td>
-                        <td><input type="text" name="login-number" class="wu-text" /></td>
+                        <td><input type="text" name="s_est00" class="wu-text" /></td>
                         <td align="right">门店编号:</td>
-                        <td><input type="text" name="login-username" class="wu-text" /></td>
-
+                        <td><input type="text" name="s_est01" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">门店名称:</td>
-                        <td><input type="text" name="login-username" class="wu-text" /></td>
+                        <td><input type="text" name="s_est_name" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">地址:</td>
-                        <td><input type="text" name="loc-sh" class="wu-text" style="width: 60px;"/>
+                        <td><input type="text" name="s_est_address1" class="wu-text" style="width: 60px;"/>
                             省
-                            <input type="text" name="loc-sh" class="wu-text" style="width: 60px;" />
+                            <input type="text" name="s_est_address2" class="wu-text" style="width: 60px;" />
                             市
-                            <input type="text" name="loc-qu" class="wu-text" style="width: 60px;"/>
+                            <input type="text" name="s_est_address3" class="wu-text" style="width: 60px;"/>
                             区</td>
                     </tr>
 
                     <tr>
+                        <td align="right">门店详细地址:</td>
+                        <td><input type="text" name="s_est_address4" class="wu-text" style="width: 100px;"/>（1:卖场， 2:零售专卖店）</td>
                         <td align="right">业务类型:</td>
-                        <td><input type="text" name="login-qx" class="wu-text" style="width: 100px;"/>（1:卖场， 2:零售专卖店）</td>
+                        <td><input type="text" name="s_est_type" class="wu-text" style="width: 100px;"/>（1:卖场， 2:零售专卖店）</td>
                     </tr>
                     <tr>
                         <td align="right">店铺电话:</td>
-                        <td><input type="text" name="login-create-date" class="wu-text" /></td>
+                        <td><input type="text" name="s_est_tel" class="wu-text" /></td>
                         <td align="right">移动电话:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est_phone" class="wu-text" /></td>
 
                     </tr>
 
                     <tr>
                         <td align="right">店长/负责人:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name=" s_est_re class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">开窗选择:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_worker_file" class="wu-text" /></td>
                         <td align="right">价格策略:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est02" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">租金/月:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est03" class="wu-text" /></td>
                         <td align="right">建筑面积:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est04" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">开户行:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est05" class="wu-text" /></td>
                         <td align="right">银行账号:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est06" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">银行户名:</td>
+                        <td><input type="text" name="s_est07" class="wu-text" /></td>
                     </tr>
 
                     <tr>
                         <td align="right">卖场客户编号:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est08" class="wu-text" /></td>
                         <td align="right">工商注册编号:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est09" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">审核状态:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est_confirm" class="wu-text" /></td>
                         <td align="right">审核人:</td>
-                        <td><input type="text" name="login-jy" class="wu-text" /></td>
+                        <td><input type="text" name="s_est10" class="wu-text" /></td>
                     </tr>
                 </table>
             </form>
         </div>
 
-            <table id="dg" class="easyui-datagrid" toolbar="#zh-toolbar"
-                   url="datafrid2_getdata.php"
+            <table id="dp-datagrid" class="easyui-datagrid" toolbar="#dp_toolbar"
                    rownumbers="true" pagination="true">
                 <thead>
                 <tr>
                     <th field="ck" checkbox="true" width="80px"></th>
-                    <th field="status" width="80px" align="center">本经销商编号</th>
-                    <th field="attr1" width="80px" align="center">门店编号</th>
-                    <th field="attr1" width="80px" align="center">门店详细地址</th>
-                    <th field="status" align="center"  width="80px">业务类型</th>
-                    <th field="status" width="80px" align="center">店铺电话</th>
-                    <th field="attr1" width="80px" align="center">移动电话</th>
-                    <th field="attr1" width="80px" align="center">店长/负责人</th>
-                    <th field="status" align="center"  width="80px">开窗选择</th>
-                    <th field="status" width="80px" align="center">价格策略</th>
-                    <th field="attr1" width="80px" align="center">租金/月</th>
-                    <th field="attr1" width="80px" align="center">建筑面积</th>
-                    <th field="status" align="center"  width="80px">开户行</th>
-                    <th field="status" width="80px" align="center">银行账号</th>
-                    <th field="attr1" width="80px" align="center">银行户名</th>
-                    <th field="attr1" width="80px" align="center">卖场客户编号</th>
-                    <th field="status" align="center"  width="80px">工商注册编号</th>
-                    <th field="status" align="center"  width="80px">审核状态</th>
-                    <th field="status" align="center"  width="80px">审核人</th>
+                    <th field="s_est00" width="80px" align="center">本经销商编号</th>
+                    <th field="s_est01" width="80px" align="center">门店编号</th>
+                    <th field="s_est_address4" width="80px" align="center">门店详细地址</th>
+                    <th field="s_est_type" align="center"  width="80px">业务类型</th>
+                    <th field="s_est_tel" width="80px" align="center">店铺电话</th>
+                    <th field="s_est_phone" width="80px" align="center">移动电话</th>
+                    <th field="s_est_re" width="80px" align="center">店长/负责人</th>
+                    <th field="s_work_file" align="center"  width="80px">开窗选择</th>
+                    <th field="s_est02" width="80px" align="center">价格策略</th>
+                    <th field="s_est03" width="80px" align="center">租金/月</th>
+                    <th field="s_est04" width="80px" align="center">建筑面积</th>
+                    <th field="s_est05" align="center"  width="80px">开户行</th>
+                    <th field="s_est06" width="80px" align="center">银行账号</th>
+                    <th field="s_est07" width="80px" align="center">银行户名</th>
+                    <th field="s_est08" width="80px" align="center">卖场客户编号</th>
+                    <th field="s_est09" align="center"  width="80px">工商注册编号</th>
+                    <th field="s_est_confirm" align="center"  width="80px">审核状态</th>
+                    <th field="s_est10" align="center"  width="80px">审核人</th>
                 </tr>
                 </thead>
             </table>
@@ -118,58 +122,56 @@
     </div>
 </div>
 <script type="text/javascript">
-var url;
-    function openAdd(){
-        $('#my-dialog').dialog('open').dialog('setTitle','店铺信息');
-        $('#zhw-form').form('clear')
+var addUrl = "http://192.168.1.251:8091/api/baseData/EstoreExq";
+
+function getFormJsonArray(){
+    var arr = $('#dp-form input')
+    var arrl = [];
+    arrl.push({})
+    arrl[0]["id"] = 1111;
+
+    for(var i= 0;i< arr.length;i++){
+        arrl[0][arr[i].name] = arr[i].value
     }
 
-    function openEdit(){
-        var row = $('#dg').datagrid('getSelected');
-        if (row){
-            $('#my-dialog').dialog('open').dialog('setTitle','修改用户信息');
-            $('#zhw-form').form('load',row);
-            console.log(row)
-            url = 'update_user.php?id='+row.id;
-        }
-    }
-    function saveUser(){
-        $('#zhw-form').form('submit',{
-            url: url,
-            onSubmit: function(){
-                return $(this).form('validate');
-            },
-            success: function(result){
-                var result = eval('('+result+')');
-                if (result.success){
-                    $('#dlg').dialog('close');		// close the dialog
-                    $('#dg').datagrid('reload');	// reload the user data
-                } else {
-                    $.messager.show({
-                        title: 'Error',
-                        msg: result.msg
-                    });
+    console.log(arrl)
+    return arrl;
+}
+    function dpAdd() {
+        $('#dp-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加店铺信息',
+            buttons:[
+                {
+                    text:'保存',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        $.ajax({
+                            type:"POST",
+                            url:addUrl,
+                            data:{
+                                flage:'1',
+                                list:getFormJsonArray()
+                            },
+                            success:function(res){
+                                console.log(res)
+                                if(res.resultCode === "0"){
+                                    $('#dp-dialog').dialog('close')
+                                    $.messager.show({title:"操作提示",msg:res.resultMessage})
+                                }
+                            }
+                        })
+                    }
+                },{
+                    text:"取消",
+                    iconCls:'icon-cancel',
+                    handler:function(){
+                        $('#dp-dialog').dialog('close')
+                    }
                 }
-            }
+            ]
         });
     }
-    function remove(){
-        var row = $('#dg').datagrid('getSelected');
-        if (row){
-            $.messager.confirm('提示','你是否要删除此用户信息?',function(r){
-                if (r){
-                    $.post('remove_user.php',{id:row.id},function(result){
-                        if (result.success){
-                            $('#dg').datagrid('reload');	// reload the user data
-                        } else {
-                            $.messager.show({	// show error message
-                                title: 'Error',
-                                msg: result.msg
-                            });
-                        }
-                    },'json');
-                }
-            });
-        }
-    }
+
 </script>

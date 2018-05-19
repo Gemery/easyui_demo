@@ -2,13 +2,13 @@
 	<div class="easyui-panel pd5" data-options="fit:true,border:true">
         <div id="zhw-toolbar1" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="gbAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="gbEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmGb()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <form id="zhw-form" method="post">
+            <form id="gbag-form" method="post">
                 <table>
                     <tr>
                         <td  align="right">所属经销商代码:</td>
@@ -54,3 +54,29 @@
     </div>
 
 </div>
+
+
+<script type="text/javascript">
+    function gbAdd(){
+        $('#gb-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'增加',
+            buttons:[{
+                text:'保存',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#gbdialog').dialog('close')
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-cancel',
+                handler:function(){
+                    $('#gb-dialog').dialog('close')
+                }
+            }]
+        })
+    }
+
+
+</script>

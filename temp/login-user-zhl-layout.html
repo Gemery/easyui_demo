@@ -8,7 +8,7 @@
 
             <div id="user_info_edit" class="easyui-dialog"
                  data-options="closed:true,iconCls:'icon-save'" style="width:600px; padding:10px;">
-                <form id="zhw-form1" method="post">
+                <form id="user-form" method="post">
                     <table>
                         <tr>
                             <td  align="right" style="width:80px">登录用户代码:</td>
@@ -44,11 +44,11 @@
                 </form>
             </div>
             <div style="padding: 20px 0 0 30px;">
-                <table style="height: 22px; line-height: 22px">
+                <table style="height: 22px; line-height: 22px" id="user-table">
                     <tr>
-                        <td  align="left">登录用户代码:xxxxxxxx</td>
+                        <td  align="left">登录用户代码: <span>bbbb</span></td>
                     <tr>
-                        <td align="left" style="padding: 10px 0">登录用户名:xxxx</td>
+                        <td align="left" style="padding: 10px 0">登录用户名: <span >aaaa</span></td>
                     </tr>
                     <tr>
                         <td align="left" style="padding: 10px 0">部门:xxxxx</td>
@@ -79,6 +79,26 @@
 </div>
 <script type="text/javascript">
     // 打开编辑窗口
+   var tdArr = ["登录用户代码","登录用户名","部门","职位","权限组编号","店铺编号","建立日期","加密"];
+    var url = "http://192.168.1.251:8091/api/baseData/getZXList";
+
+    $(function(){
+        $.ajax({
+            type:'post',
+            url:url,
+            data: {id:111},
+            success:function(res){
+                var html = '';
+                for(var i=0;i<res[0].length-6;i++){
+                    html +=`
+                      <tr>
+                        <td align="left" style="padding: 10px 0">${td[i]}:${res[0]}</td>
+                    </tr>
+                `;
+                }
+            }
+        })
+    })
     function editUser(){
         $('#user_info_edit').dialog({
             closed: false,
@@ -88,7 +108,16 @@
                 text: '确定',
                 iconCls: 'icon-ok',
                 handler:  function () {
-                    $('#user_info_edit').dialog('close');
+                    $.ajax({
+                        type:'post',
+                        url:url,
+                        data:{},
+                        success:function (res) {
+                            $('#user_info_edit').dialog('close');
+
+                             $.messager.alert('操作提示')
+                        }
+                    })
                 }
             }, {
                 text: '取消',

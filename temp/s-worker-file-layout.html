@@ -13,7 +13,7 @@
             <form id="emp-form" method="post">
                 <table>
                     <tr>
-                        <td  align="right" class="dw" ">所属经销商代码:</td>
+                        <td  align="right" class="dw" >所属经销商代码:</td>
                         <td><input type="text" name="sw_occ00" class="wu-text" /></td>
                     </tr>
                     <tr>
@@ -45,7 +45,7 @@
                     </tr>
                     <tr>
                         <td align="right">员工在职状态:</td>
-                        <td><select style="width: 150px;">
+                        <td><select style="width: 150px;" id="ddl" name="sw_status">
                             <option value="Y">在职</option>
                             <option value="N">离职</option>
                             </select></td>
@@ -56,29 +56,73 @@
             </div>
         </div>
         <table id="worker-datagrid" class="easyui-datagrid" toolbar="worker-toolbar"
-               url="datafrid2_getdata.php"
                rownumbers="true" pagination="true">
             <thead>
             <tr>
                 <th field="ck" checkbox="true"></th>
-                <th field="itemid" width="80">所属经销商</th>
-                <th field="productid" width="80">店铺编号</th>
-                <th field="unitcost" width="80" align="center">员工编号</th>
-                <th field="unitcost" width="80" align="center">姓名</th>
-                <th field="attr1" width="80">性别</th>
-                <th field="status" width="120">身份证号码</th>
-                <th field="attr1" width="80">部门</th>
-                <th field="status" width="120" >职位</th>
-                <th field="attr1" width="80">失效日期</th>
-                <th field="unitcost" width="80" align="center">电话</th>
-                <th field="attr1" width="80">在职否</th>
+                <th field="sw_occ00" width="80">所属经销商</th>
+                <th field="sw_occ01" width="80">店铺编号</th>
+                <th field="sw_code" width="80" align="center">员工编号</th>
+                <th field="sw_name" width="80" align="center">姓名</th>
+                <th field="sw_sex" width="80">性别</th>
+                <th field="sw_card" width="120">身份证号码</th>
+                <th field="sw_department" width="80">部门</th>
+                <th field="sw_posit" width="120" >职位</th>
+                <th field="sw_phone" width="80" align="center">电话</th>
+                <th field="sw_status" width="80">在职否</th>
             </tr>
             </thead>
         </table>
     </div>
 </div>
 <script type="text/javascript">
+  var data = {
+      "sw_id": 0,
+          "sw_occ00": "string",
+          "sw_occ01": "string",
+          "sw_code": "string",
+          "sw_name": "string",
+          "sw_sex": "string",
+          "sw_card": "string",
+          "sw_department": "string",
+          "sw_posit": "string",
+          "sw_phone": "string",
+          "sw_status": "string"
 
+  }
+    $(function(){
+        $.ajax({
+            type: 'post',
+            url: 'http://192.168.1.251:8091/api/baseData/getWorkerJsonStr',
+            data: data,
+            success:function(res){
+                console.log(res)
+                $('#worker-datagrid').datagrid('loadData',res);
+            }
+        });
+
+       var selec  = $("#ddl").find("option:selected");
+
+        console.log(selec.val(),selec.text());
+
+    });
+
+  function getFormJsonArray(){
+      var arr = $('#emp-form input')
+      var arrl = [];
+      arrl.push({})
+      arrl[0]["id"] = "1";
+
+      for(var i= 0;i< arr.length;i++){
+          arrl[0][arr[i].name] = arr[i].value
+      }
+      arrl[0][$('#ddl').attr('name')] = $('#ddl').find('option:selected').val();
+
+      console.log(arrl)
+      return arrl;
+  }
+
+  var addUrl = "http://192.168.1.251:8091/api/baseData/WorkerExq";
     function openEmp(){
         $('#emp-dialog').dialog({
             closed: false,
@@ -88,7 +132,21 @@
                 text: '确定',
                 iconCls: 'icon-ok',
                 handler:  function () {
-                    $('#emp-dialog').dialog('close');
+                    $.ajax({
+                        type:"POST",
+                        url:addUrl,
+                        data:{
+                            flage:'1',
+                            list:getFormJsonArray()
+                        },
+                        success:function(res){
+                            console.log(res)
+                            if(res.resultCode === "0"){
+                                $('#emp-dialog').dialog('close')
+                                $.messager.show({title:"操作提示",msg:res.resultMessage})
+                            }
+                        }
+                    })
                 }
             }, {
                 text: '取消',
