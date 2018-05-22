@@ -27,18 +27,16 @@
                     <tr>
                         <td align="right">科目性质:</td>
                         <td><input type="text" name="s_aag03" class="wu-text" /></td>
-
                     </tr>
-
                     <tr>
                         <td align="right">资产/损益类别:</td>
                         <td>
-                            <select id="s_aag04" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                            <select id="s_aag04" class="easyui-combobox" panelHeight="auto" style="width:240px">
                                 <option value="1">资产负责</option>
                                 <option value="2">损益</option>
                             </select></td>
                         <td align="right">科目层级:</td>
-                        <td> <select id="s_aag05" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                        <td> <select id="s_aag05" class="easyui-combobox" panelHeight="auto" style="width:240px">
                             <option value="1">部门管理</option>
                             <option value="2">预算控制</option>
                             <option value="3">项目控制</option>
@@ -47,7 +45,7 @@
                     </tr>
                     <tr>
                         <td align="right">正常余额类型:</td>
-                        <td><select id="s_aag06" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                        <td><select id="s_aag06" class="easyui-combobox" panelHeight="auto" style="width:240px">
                             <option value="1">借方余额</option>
                             <option value="2">贷方余额</option>
                         </select></td>
@@ -109,12 +107,15 @@
 </div>
 <script type="text/javascript">
 var edit_url = "http://192.168.1.251:8091/api/finace/aagExq";
+
 var get_data_url = "http://192.168.1.251:8091/api/finace/getAagJsonStr";
+
+
 // 获得form 中input标签的数据 组成一jsonArray
 function getFormJsonArray(){
-    var arr = $('#aag-form input')
+    var arr = $('#aag-form input');
     var arrl = [];
-    arrl.push({id:1111})
+    arrl.push({id:1111});
 
     for(var i= 0;i< arr.length;i++){
         arrl[0][arr[i].name] = arr[i].value
@@ -128,7 +129,7 @@ function getFormJsonArray(){
            url:get_data_url,
            data:{id:1111},
            success:function(res) {
-               $('#dp-datagrid').datagrid('loadData',res)
+               $('#aag-datagrid').datagrid('loadData',res)
         }
        })
     });
@@ -138,7 +139,7 @@ function getFormJsonArray(){
         $('#aag-dialog').dialog({
             closed:false,
             modal:true,
-            title:'添加店铺信息',
+            title:'添加一条记录信息',
             buttons:[
                 {
                     text:'保存',

@@ -52,10 +52,8 @@
                     </table>
                 </form>
             </div>
-
         </div>
     </div>
-</div>
 </div>
 
 <script type="text/javascript">
@@ -71,7 +69,7 @@
     var get_position_url="http://192.168.1.251:8091/api/baseData/getPositionJsonStr?s_p00=ss&s_p_code=ss"
     var add_position_url = 'http://192.168.1.251:8091/api/baseData/PositionExq';
 
-    $(function(){
+
         $.ajax({
             type:'get',
             url:get_position_url,
@@ -80,7 +78,7 @@
                 $('#tt').datagrid('loadData',res)
             }
         })
-    })
+
 
     function getFormJsonArray(){
         var arr = $('#form input')
@@ -90,7 +88,7 @@
         for(var i= 0;i< arr.length;i++){
             arrl[0][arr[i].name] = arr[i].value
         }
-        console.log(arrl);
+        console.log(arrl)
         return arrl;
     }
     function newUser(){

@@ -1,0 +1,124 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="tqb-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="tqbAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="tqbEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmTqb()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+            <table id="tqb-datagrid" class="easyui-datagrid" toolbar="#wu-toolbar4"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true"></th>
+                    <th field="s_tqb01" width="120">产品系列编码</th>
+                    <th field="s_tqb02" width="200" align="center">系列名称</th>
+                    <th field="s_tqb03" width="120" align="center">与工厂同步ID或标识</th>
+                    <th field="s_tqb04" width="120" align="center">产品大类</th>
+                    <th field="s_tqbacti" width="120" align="center">是否有效</th>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <div id="tqb-dialog" class="easyui-dialog"
+                 data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+                <form id="tqb-form" method="post">
+                    <table>
+                        <tr>
+                            <td  align="right" style="width: 100px;" >产品系列编码:</td>
+                            <td><input type="text" name="s_tqb01" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right" style="width: 100px;">系列名称:</td>
+                            <td><input type="text" name="s_tqb02" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">与工厂同步ID或标识:</td>
+                            <td><input type="text" name="s_tqb03" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">产品大类:</td>
+                            <td><input type="text" name="s_tqb04" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right">是否有效:</td>
+                            <td><input type="text" name="s_tqbacti" class="wu-text" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function getFormJsonArray(){
+        var arr = $('#tqb-form input')
+        var arrl = [];
+        arrl.push({id:11})
+
+        for(var i= 0;i< arr.length;i++){
+            arrl[0][arr[i].name] = arr[i].value
+        }
+        console.log(arr)
+        return arrl;
+
+    }
+
+    function formatAction(value,row,index){
+
+        var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+        var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+        return e+d;
+
+    }
+    var get_data_url = 'http://192.168.1.251:8091/api/finace/getAabJsonStr?s_aab00=300005&s_aab01=string&s_aab02=string';
+        $.ajax({
+            type:'get',
+            url:get_data_url,
+            success:function(res){
+                $('#aab-datagrid').datagrid('loadData',res);
+
+            }
+        });
+
+
+    var add_record_url = 'http://192.168.1.251:8091/api/finace/aabExq';
+    function aabAdd(){
+        $('#aab-dialog').dialog({
+            closed: false,
+            modal:true,
+            title: "添加一条新记录",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler:  function () {
+                    $.ajax({
+                        type:'post',
+                        url : add_record_url,
+                        data :{
+                            flage:'1',
+                            list:getFormJsonArray()
+                        },
+                        success:function(res){
+                            $.messager.alert('操作成功!!!');
+                        }
+                    })
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#aab-dialog').dialog('close');
+                }
+            }]
+        });
+    }
+
+</script>
