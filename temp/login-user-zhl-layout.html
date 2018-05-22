@@ -43,62 +43,45 @@
                     </table>
                 </form>
             </div>
-            <div style="padding: 20px 0 0 30px;">
-                <table style="height: 22px; line-height: 22px" id="user-table">
-                    <tr>
-                        <td  align="left">登录用户代码: <span>bbbb</span></td>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">登录用户名: <span >aaaa</span></td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">部门:xxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">职位:xxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">权限组编号:xxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">店铺编号:xxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">建立日期:xxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">禁用否:xxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="padding: 10px 0">加密:xxxxxxx</td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+            <table id="rlogin-datagrid" class="easyui-datagrid" toolbar="worker-toolbar"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true"></th>
+                    <th field="s_zx00" width="80">本经销商代码</th>
+                    <th field="s_zx01" width="80">登录用户代码</th>
+                    <th field="s_zx02" width="80">登录用户名</th>
+                    <th field="s_zx03" width="80" align="center">部门</th>
+                    <th field="s_zx04" width="80" align="center">职位</th>
+                    <th field="s_zx05" width="80">权限组编号<th>
+                    <th field="s_zx06" width="80">店铺编号<th>
+                    <th field="s_zxdate " width="120">建立日期</th>
+                    <th field="s_forbid" width="80">加密</th>
+                </tr>
+                </thead>
+            </table>
+
     </div>
     </div>
 </div>
 <script type="text/javascript">
-    // 打开编辑窗口
-   var tdArr = ["登录用户代码","登录用户名","部门","职位","权限组编号","店铺编号","建立日期","加密"];
-    var url = "http://192.168.1.251:8091/api/baseData/getZXList";
+
+   //var tdArr = ["登录用户代码","登录用户名","部门","职位","权限组编号","店铺编号","建立日期","加密"];
+    var get_url_zxl = "http://192.168.1.251:8091/api/baseData/getZXList";
+    var edit_url_zxl = "http://192.168.1.251:8091/api/baseData/zxExq";
 
     $(function(){
         $.ajax({
             type:'post',
-            url:url,
+            url:get_url_zxl,
             data: {id:111},
             success:function(res){
-                var html = '';
-                for(var i=0;i<res[0].length-6;i++){
-                    html +=`
-                      <tr>
-                        <td align="left" style="padding: 10px 0">${td[i]}:${res[0]}</td>
-                    </tr>
-                `;
-                }
+                $('#rlogin-datagrid').datagrid('loadData',res)
+
             }
         })
-    })
+    });
+   // 打开编辑窗口
     function editUser(){
         $('#user_info_edit').dialog({
             closed: false,
@@ -110,8 +93,13 @@
                 handler:  function () {
                     $.ajax({
                         type:'post',
-                        url:url,
-                        data:{},
+                        url:edit_url_zxl,
+                        data:{"list":[ {
+                            "id": 1,
+                            "s_zx00": "3000051",
+                            "s_zx01": "3000050010001011",
+                            "s_zx08": "MTIzNDU2"}],
+                            "flage":"2"},
                         success:function (res) {
                             $('#user_info_edit').dialog('close');
 

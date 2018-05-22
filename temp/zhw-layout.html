@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../css/form-style.css" />
-
 <div class="easyui-layout" data-options="fit:true">
     <div class="easyui-panel pd5" data-options="fit:true,border:true">
         <div id="toolbar" >
@@ -11,16 +9,15 @@
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
             <table id="tt" class="easyui-datagrid" toolbar="#wu-toolbar4"
-
                    rownumbers="true" pagination="true">
                 <thead>
                 <tr>
                     <th field="ck" checkbox="true" width="200px"></th>
                     <th field="s_p01" width="200px" align="center">职位编号</th>
                     <th field="s_p02" width="200px" align="center">职务名称</th>
-                    <th field="attr1" width="200px" align="center">部门</th>
-                    <th field="status" align="center"  width="200px"
-                        editor="{type:'checkbox',options:{on:'P',off:''}}">经销商代码</th>
+                    <th field="s_p03" width="200px" align="center">部门</th>
+                    <th field="s_p00" align="center"  width="200px">经销商代码</th>
+                    <th field="s_p04" align="center"  width="200px">店铺编号</th>
 
                     <th field="action" width="200" align="center" formatter="formatAction">Action</th>
                 </tr>
@@ -33,24 +30,24 @@
                 <form id="form" method="post">
                     <table>
                         <tr>
-                            <td width="60" align="right">经销商代码:</td>
-                            <td><input type="text" name="s_p00" class="wu-text" /></td>
-                        </tr>
-                        <tr>
-                            <td align="right">邮 箱:</td>
-                            <td><input type="text" name="s_p_code" class="wu-text" /></td>
-                        </tr>
-                        <tr>
-                            <td align="right">主 题:</td>
+                            <td width="60" align="right">职位编号:</td>
                             <td><input type="text" name="s_p01" class="wu-text" /></td>
                         </tr>
                         <tr>
-                            <td valign="right" align="right">内 容:</td>
+                            <td align="right">职位名称:</td>
                             <td><input type="text" name="s_p02" class="wu-text" /></td>
                         </tr>
                         <tr>
-                            <td valign="right" align="right">内 容:</td>
+                            <td align="right">部门:</td>
                             <td><input type="text" name="s_p03" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td valign="right" align="right">本经销商代码:</td>
+                            <td><input type="text" name="s_p00" class="wu-text" /></td>
+                        </tr>
+                        <tr>
+                            <td valign="right" align="right">店铺编号:</td>
+                            <td><input type="text" name="s_p_code" class="wu-text" /></td>
                         </tr>
                     </table>
                 </form>
@@ -71,16 +68,16 @@
     }
 </script>
 <script type="text/javascript">
-    var url1="http://192.168.1.251:8091/api/baseData/getPositionJsonStr?s_p00=11&s_p_code=222"
-    var url = 'http://192.168.1.251:8091/api/baseData/PositionExq';
+    var get_position_url="http://192.168.1.251:8091/api/baseData/getPositionJsonStr?s_p00=ss&s_p_code=ss"
+    var add_position_url = 'http://192.168.1.251:8091/api/baseData/PositionExq';
 
     $(function(){
         $.ajax({
             type:'get',
-            url:url1,
+            url:get_position_url,
             success:function(res){
-                console.log(res)
-                //TODO $('#tt').datagrid('loadData',res);
+
+                $('#tt').datagrid('loadData',res)
             }
         })
     })
@@ -88,12 +85,12 @@
     function getFormJsonArray(){
         var arr = $('#form input')
         var arrl = [];
-        arrl.push({})
-        arrl[0]["id"] = "1";
+        arrl.push({id:11})
 
         for(var i= 0;i< arr.length;i++){
             arrl[0][arr[i].name] = arr[i].value
         }
+        console.log(arrl);
         return arrl;
     }
     function newUser(){
@@ -110,7 +107,7 @@
                         //console.log(arr)
                         $.ajax({
                             type:"POST",
-                            url:url,
+                            url:add_position_url,
                             data:{
                                 flage:'1',
                                 list:getFormJsonArray()

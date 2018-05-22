@@ -1,0 +1,174 @@
+<div class="easyui-layout" data-options="fit:true">
+	<div class="easyui-panel pd5" data-options="fit:true,border:true">
+        <div id="aag-toolbar" >
+            <div class="wu-toolbar-search" style="background: #ddd;">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="aagAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="aagEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmAag()" plain="true">删除</a>
+                <label>关键词：</label><input class="wu-text" style="width:100px">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
+            </div>
+
+
+            <div class="easyui-dialog" id="aag-dialog"style="width:800px;height:380px;padding:10px 20px"
+                          closed="true" buttons="#dlg-buttons">
+            <form id="aag-form" method="post">
+                <table>
+                    <tr>
+                        <td  align="right" style="width: 60px;">经销商代码:</td>
+                        <td><input type="text" name="s_aag00" class="wu-text" /></td>
+                        <td align="right">客户编号:</td>
+                        <td><input type="text" name="s_aag01" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">客户名称:</td>
+                        <td><input type="text" name="s_aag02" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">科目性质:</td>
+                        <td><input type="text" name="s_aag03" class="wu-text" /></td>
+
+                    </tr>
+
+                    <tr>
+                        <td align="right">资产/损益类别:</td>
+                        <td>
+                            <select id="s_aag04" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                                <option value="1">资产负责</option>
+                                <option value="2">损益</option>
+                            </select></td>
+                        <td align="right">科目层级:</td>
+                        <td> <select id="s_aag05" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                            <option value="1">部门管理</option>
+                            <option value="2">预算控制</option>
+                            <option value="3">项目控制</option>
+                            <option value="4">控制核算业务</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td align="right">正常余额类型:</td>
+                        <td><select id="s_aag06" class="easyui-combobox" panelHeight="auto" style="width:120px">
+                            <option value="1">借方余额</option>
+                            <option value="2">贷方余额</option>
+                        </select></td>
+                        <td align="right">科目分类:</td>
+                        <td><input type="text" name="s_aag07" class="wu-text" /></td>
+                    </tr>
+
+                    <tr>
+                        <td align="right">财务分析类型:</td>
+                        <td><input type="text" name="s_aag08" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">结账类型:</td>
+                        <td><input type="text" name="s_aag09" class="wu-text" /></td>
+                        <td align="right">录入人员:</td>
+                        <td><input type="text" name="s_aag_user" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核状态:</td>
+                        <td><input type="text" name="s_aag_confirm_state" class="wu-text" /></td>
+                        <td align="right">审核人:</td>
+                        <td><input type="text" name="s_aag_confirm_user" class="wu-text" /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">审核时间:</td>
+                        <td><input type="text" name="s_aag_confirm_date" class="wu-text" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+            <table id="aag-datagrid" class="easyui-datagrid" toolbar="#aag_toolbar"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true" width="80px"></th>
+                    <th field="s_aag00" width="80px" align="center">经销商代码</th>
+                    <th field="s_aag01" width="80px" align="center">客户编号</th>
+                    <th field="s_aag02" width="80px" align="center">客户名称</th>
+                    <th field="s_aag03" align="center"  width="80px">科目性质</th>
+                    <th field="s_aag04" width="80px" align="center">资产/损益类别</th>
+
+                    <th field="s_aag05" width="80px" align="center">科目层级</th>
+                    <th field="s_aag06" width="80px" align="center">正常余额类型</th>
+                    <th field="s_aag07" align="center"  width="80px">科目分类</th>
+                    <th field="s_aag08" width="80px" align="center">财务分析类型</th>
+
+                    <th field="s_aag09" width="80px" align="center">结账类型</th>
+                    <th field="s_aag_user" width="80px" align="center">录入人员</th>
+                    <th field="s_aag_confirm_state" align="center"  width="80px">审核状态</th>
+                    <th field="s_aag_confirm_user" width="80px" align="center">审核人</th>
+                    <th field="s_aag_confirm_date" width="80px" align="center">审核时间</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+var edit_url = "http://192.168.1.251:8091/api/finace/aagExq";
+var get_data_url = "http://192.168.1.251:8091/api/finace/getAagJsonStr";
+// 获得form 中input标签的数据 组成一jsonArray
+function getFormJsonArray(){
+    var arr = $('#aag-form input')
+    var arrl = [];
+    arrl.push({id:1111})
+
+    for(var i= 0;i< arr.length;i++){
+        arrl[0][arr[i].name] = arr[i].value
+    }
+    return arrl;
+}
+// 初始获得店铺信息列表
+    $(function () {
+       $.ajax({
+           type:'post',
+           url:get_data_url,
+           data:{id:1111},
+           success:function(res) {
+               $('#dp-datagrid').datagrid('loadData',res)
+        }
+       })
+    });
+
+
+    function aagAdd() {
+        $('#aag-dialog').dialog({
+            closed:false,
+            modal:true,
+            title:'添加店铺信息',
+            buttons:[
+                {
+                    text:'保存',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        $.ajax({
+                            type:"POST",
+                            url:edit_url,
+                            data:{
+                                flage:'1',
+                                list:getFormJsonArray()
+                            },
+                            success:function(res){
+                                console.log(res)
+                                if(res.resultCode === "0"){
+                                    $('#aag-dialog').dialog('close')
+                                    $.messager.show({title:"操作提示",msg:res.resultMessage})
+                                }
+                            }
+                        })
+                    }
+                },{
+                    text:"取消",
+                    iconCls:'icon-cancel',
+                    handler:function(){
+                        $('#aag-dialog').dialog('close')
+                    }
+                }
+            ]
+        });
+    }
+
+</script>

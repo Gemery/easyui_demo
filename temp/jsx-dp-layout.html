@@ -123,20 +123,31 @@
 </div>
 <script type="text/javascript">
 var addUrl = "http://192.168.1.251:8091/api/baseData/EstoreExq";
-
+var get_data_url = "http://192.168.1.251:8091/api/baseData/getEstoreList";
+// 获得form 中input标签的数据 组成一jsonArray
 function getFormJsonArray(){
     var arr = $('#dp-form input')
     var arrl = [];
-    arrl.push({})
-    arrl[0]["id"] = 1111;
+    arrl.push({id:1111})
 
     for(var i= 0;i< arr.length;i++){
         arrl[0][arr[i].name] = arr[i].value
     }
-
-    console.log(arrl)
     return arrl;
 }
+// 初始获得店铺信息列表
+    $(function () {
+       $.ajax({
+           type:'post',
+           url:get_data_url,
+           data:{id:1111},
+           success:function(res) {
+               $('#dp-datagrid').datagrid('loadData',res)
+        }
+       })
+    });
+
+
     function dpAdd() {
         $('#dp-dialog').dialog({
             closed:false,

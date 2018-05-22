@@ -17,6 +17,10 @@
                         <td><input type="text" name="sw_occ00" class="wu-text" /></td>
                     </tr>
                     <tr>
+                        <td  align="right" class="dw" >店铺编号:</td>
+                        <td><input type="text" name="sw_occ01" class="wu-text" /></td>
+                    </tr>
+                    <tr>
                         <td align="right">员工编号:</td>
                         <td><input type="text" name="sw_code" class="wu-text" /></td>
                     </tr>
@@ -77,18 +81,10 @@
 </div>
 <script type="text/javascript">
   var data = {
-      "sw_id": 0,
+           "sw_id": 0,
           "sw_occ00": "string",
           "sw_occ01": "string",
-          "sw_code": "string",
-          "sw_name": "string",
-          "sw_sex": "string",
-          "sw_card": "string",
-          "sw_department": "string",
-          "sw_posit": "string",
-          "sw_phone": "string",
-          "sw_status": "string"
-
+          "sw_code": "string"
   }
     $(function(){
         $.ajax({
@@ -117,7 +113,7 @@
           arrl[0][arr[i].name] = arr[i].value
       }
       arrl[0][$('#ddl').attr('name')] = $('#ddl').find('option:selected').val();
-
+      arrl[0]['sw_addTime'] = new Date().getTime()
       console.log(arrl)
       return arrl;
   }
@@ -127,7 +123,7 @@
         $('#emp-dialog').dialog({
             closed: false,
             modal:true,
-            title: "价格信息添加",
+            title: "员工信息添加",
             buttons: [{
                 text: '确定',
                 iconCls: 'icon-ok',
@@ -136,7 +132,7 @@
                         type:"POST",
                         url:addUrl,
                         data:{
-                            flage:'1',
+                            flage:'2',
                             list:getFormJsonArray()
                         },
                         success:function(res){
