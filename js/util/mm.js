@@ -28,6 +28,18 @@ var _mm = {
                 typeof param.error === 'function' && param.error(err.statusText);
             }
         });
+    },
+    deleteRowByFieldName:function(tableName,idFieldName,idList,callBack){
+        console.log(this)
+        $.ajax({
+            type:'get',
+            url:'"http://192.168.1.251:8091/api/baseData/BatchDeleting?'+
+                'tableName='+tableName+'&idFieldName='+idFieldName+'&idList='+
+                idList,
+            success:function (res) {
+                callBack();
+            }
+        });
     }
 }
 moudle.exports = _mm;

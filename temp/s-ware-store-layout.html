@@ -8,97 +8,141 @@
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <div id="store-dialog" style="width: 600px; padding: 10px;"
+            <div id="store-dialog" style="width:800px; padding: 10px;"
             class="easyui-dialog" data-options="closed:true">
             <form id="store-form" method="post">
                 <table>
                     <tr>
                         <td  align="right" style="width: 70px;">归属上级销商代码:</td>
-                        <td><input type="text" name="ss_occ01" class="dw" /></td>
+                        <td><input type="text" name="ss_occ01" class="wu-text" /></td>
                         <td align="right">所属经销商代码:</td>
-                        <td><input type="text" name="ss_occ00" class="dw" /></td>
+                        <td><input type="text" name="ss_occ00" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right" style="width: 70px;">所属经销商门店编号:</td>
-                        <td><input type="text" name="ss_est01" class="dw" /></td>
+                        <td><input type="text" name="ss_est01" class="wu-text" /></td>
                         <td align="right">仓库电话:</td>
-                        <td><input type="text" name="ss_phone" class="dw" /></td>
+                        <td><input type="text" name="ss_phone" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">仓库代码:</td>
-                        <td><input type="text" name="ss_code" class="dw" /></td>
+                        <td><input type="text" name="ss_code" class="wu-text" /></td>
                         <td align="right">仓库名称:</td>
-                        <td><input type="text" name="ss_name" class="dw" /></td>
+                        <td><input type="text" name="ss_name" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">仓库地址:</td>
-                        <td><input type="text" name="ss_address" class="dw" /></td>
+                        <td><input type="text" name="ss_address" class="wu-text" /></td>
                         <td align="right">仓库负责人:</td>
-                        <td><input type="text" name="ss_worker" class="dw" /></td>
+                        <td><input type="text" name="ss_worker" class="wu-text" /></td>
 
                     </tr>
                     <tr>
                         <td align="right">存货科目:</td>
-                        <td><input type="text" name="ss_subject" class="dw" /></td>
+                        <td><input type="text" name="ss_subject" class="wu-text" /></td>
                         <td align="right">是否有效:</td>
-                        <td><input type="text" name="ss_acti" class="dw" /></td>
+                        <td><input type="text" name="ss_acti" class="wu-text" /></td>
                     </tr>
                     <tr>
                         <td align="right">资料建立者:</td>
-                        <td><input type="text" name="ss_user" class="dw" /></td>
+                        <td><input type="text" name="ss_user" class="wu-text" /></td>
                         <td align="right">建立日期:</td>
-                        <td><input type="text" name="ss_date" class="dw easyui-datebox" /></td>
+                        <td><input type="text" name="ss_date" class="wu-text easyui-datebox" /></td>
                     </tr>
                     <tr>
                         <td align="right">仓库资料审核否:</td>
-                        <td><input type="text" name="ss_confirm" class="dw" /></td>
+                        <td><input type="text" name="ss_confirm" class="wu-text" /></td>
                     </tr>
                 </table>
             </form>
             </div>
         </div>
-        <table id="store-table" class="easyui-datagrid" toolbar="#store-toolbar"
-           url="datafrid2_getdata.php"
+        <table id="store-datagrid" class="easyui-datagrid" toolbar="#store-toolbar"
            rownumbers="true" pagination="true">
         <thead>
         <tr>
-            <!--由凭证模板编号的 单身表-->
-            <th field="ck" checkbox="true" width="80px"></th>
-            <th field="attr1" width="80px" align="center">归属上级销商代码</th>
-            <th field="status" width="80px" align="center">所属经销商代码</th>
-            <th field="attr1" width="80px" align="center">所属经销商门店编号</th>
-            <th field="status" align="center"  width="80px">仓库代码</th>
-            <th field="attr1" width="80px" align="center">仓库名称</th>
-            <th field="attr1" width="80px" align="center">仓库地址</th>
-            <th field="attr1" width="80px" align="center">核算项目</th>
-            <th field="attr1" width="80px" align="center">是否有效</th>
-            <th field="attr1" width="80px" align="center">资料建立者</th>
-            <th field="attr1" width="80px" align="center">建立日期</th>
-            <th field="attr1" width="80px" align="center">仓库资料审核否</th>
-            <th field="action" width="100" align="center" formatter="formatAction">Action</th>
+
+            <th field="ck" checkbox="true" width="1000px"></th>
+            <th field="ss_occ01" width="120px" align="center">归属上级销商代码</th>
+            <th field="ss_occ00" width="120px" align="center">所属经销商代码</th>
+            <th field="ss_est01" width="120px" align="center">所属经销商门店编号</th>
+            <th field="ss_code" align="center"  width="80px">仓库代码</th>
+            <th field="ss_name" width="80px" align="center">仓库名称</th>
+            <th field="ss_address" width="80px" align="center">仓库地址</th>
+            <th field="ss_worker" width="80px" align="center">仓库负责人</th>
+            <th field="ss_phone" width="80px" align="center">仓库电话</th>
+            <th field="ss_subject" width="80px" align="center">存货科目</th>
+            <th field="ss_acti" width="80px" align="center">是否有效</th>
+            <th field="ss_user" width="80px" align="center">资料建立者</th>
+            <th field="ss_date" width="130" align="center">建立日期</th>
+            <th field="ss_confirm" width="80px" align="center">仓库资料审核否</th>
+            <th field="action" width="100" align="center" formatter="formatAction">操作</th>
         </tr>
         </thead>
     </table>
     </div>
 </div>
+<script type="text/javascript" src="../js/util/mm.js"></script>
 <script type="text/javascript">
+    var add_record_url = 'http://192.168.1.251:8091/api/stockData/tqbExq';
+    var get_data_url = 'http://192.168.1.251:8091/api/stockData/getWareStoreList';
+
+    function removeStore() {
+        _mm.deleteRowByFieldName();
+    }
+
     function formatAction(value,row,index){
-        var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
-        var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+        var e = '<a href="#" onclick="editrow(this)">编辑</a> ';
+        var d = '<a href="#" onclick="deleterow(this)">删除</a>';
         return e+d;
 
     }
+    function getFormJsonArray(){
+        var arr = $('#store-form input')
+        var arrl = [];
+        arrl.push({id:11})
+
+        for(var i= 0;i< arr.length;i++){
+            arrl[0][arr[i].name] = arr[i].value
+        }
+        console.log(arrl)
+        return arrl;
+    }
+    function loadData(){
+        $.ajax({
+            type:'post',
+            url: get_data_url,
+            data:{id:111},
+            success:function(res){
+                $('#store-datagrid').datagrid('loadData',res)
+            }
+        })
+    }
+    loadData();
 
     function addStore(){
         $('#store-dialog').dialog({
             closed:false,
             modal:true,
-            title:'添加仓库',
+            title:'添加一条仓库信息',
             buttons: [{
                 text: '确定',
                 iconCls: 'icon-ok',
                 handler: function () {
-                    $('#store-dialog').dialog('close');
+                    $.ajax({
+                        type:'post',
+                        url:add_record_url,
+                        data:{
+                            flage:'1',
+                            list:getFormJsonArray(),
+                        },
+                        success:function(res){
+                            $('#store-dialog').dialog('close');
+                            $.messager.alert('操作成功');
+                            loadData();
+                        }
+                    })
+
                 }
             }, {
                 text: '取消',

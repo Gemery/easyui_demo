@@ -1,16 +1,31 @@
 <div class="easyui-layout" data-options="fit:true">
     <div class="easyui-panel pd5" data-options="fit:true,border:true">
-        <div id="tqa-toolbar" >
+        <div id="unit-toolbar" >
             <div class="wu-toolbar-search" style="background: #ddd;">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="tqaAdd()" plain="true">添加</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="tqaEdit()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmTqa()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="unitAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="unitEdit()" plain="true">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="rmUnit()" plain="true">删除</a>
                 <label>关键词：</label><input class="wu-text" style="width:100px">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-search">开始检索</a>
             </div>
-            <div id="tqa-dialog" class="easyui-dialog"
+            <table id="unit-datagrid" class="easyui-datagrid" toolbar="#unit-toolbar"
+                   rownumbers="true" pagination="true">
+                <thead>
+                <tr>
+                    <th field="ck" checkbox="true"></th>
+                    <th field="s_tqa01" width="120">产品系列编码</th>
+                    <th field="s_tqa02" width="200" align="center">系列名称</th>
+                    <th field="s_tqa03" width="120" align="center">与工厂同步ID或标识</th>
+                    <th field="s_tqa04" width="120" align="center">类型</th>
+                    <th field="action" width="200" align="center" formatter="formatAction">Action</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <div id="unit-dialog" class="easyui-dialog"
                  data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
-                <form id="-form" method="post">
+                <form id="unit-form" method="post">
                     <table>
                         <tr>
                             <td  align="right" style="width: 100px;" >产品系列编码:</td>
@@ -32,19 +47,6 @@
                 </form>
             </div>
         </div>
-        <table id="tqa-datagrid" class="easyui-datagrid" toolbar="#tqa-toolbar"
-               rownumbers="true" pagination="true">
-            <thead>
-            <tr>
-                <th field="ck" checkbox="true"></th>
-                <th field="s_tqa01" width="120">产品系列编码</th>
-                <th field="s_tqa02" width="200" align="center">系列名称</th>
-                <th field="s_tqa03" width="120" align="center">与工厂同步ID或标识</th>
-                <th field="s_tqa04" width="120" align="center">类型</th>
-                <th field="action" width="200" align="center" formatter="formatAction">Action</th>
-            </tr>
-            </thead>
-        </table>
     </div>
 </div>
 
@@ -71,10 +73,10 @@
         return e+d;
 
     }
-    var get_data_url = 'http://192.168.1.251:8091/api/imaData/getTqaJsonStr?';
+    var get_data_url = 'http://192.168.1.251:8091/api/finace/getUnitJsonStr?';
         $.ajax({
             type:'get',
-            url:get_data_url+'s_tqa01=11'+'&'+'s_tqa02=11'+'&'+'s_tqa04=11',
+            url:get_data_url,
             success:function(res){
                 $('#aab-datagrid').datagrid('loadData',res);
 
@@ -82,9 +84,9 @@
         });
 
 
-    var add_record_url = 'http://192.168.1.251:8091/api/imaData/tqaExq';
-    function tqaAdd(){
-        $('#tqa-dialog').dialog({
+    var add_record_url = 'http://192.168.1.251:8091/api/finace/unit`Exq';
+    function unitAdd(){
+        $('#unit-dialog').dialog({
             closed: false,
             modal:true,
             title: "添加一条新记录",
@@ -108,7 +110,7 @@
                 text: '取消',
                 iconCls: 'icon-cancel',
                 handler: function () {
-                    $('#aab-dialog').dialog('close');
+                    $('#unit-dialog').dialog('close');
                 }
             }]
         });
